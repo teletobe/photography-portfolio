@@ -16,7 +16,7 @@ const tabs = [
   },
   {
     key: "landscapes",
-    display: "landscapes",
+    display: "Landscapes",
   },
 ];
 
