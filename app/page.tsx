@@ -29,7 +29,7 @@ export default function Home() {
       </Head>
 
       <header className="flex justify-between items-center h-[90px] px-6">
-        <div className="text-transparent">hm</div>
+        <div className="text-transparent">hm get in touch</div>
         <div className="text-center">Portfolio</div>
         <Link
           href="#"
@@ -48,7 +48,7 @@ export default function Home() {
                 <Tab key={tab.key} className="p-2">
                   {({ selected }) => (
                     <span
-                      className={selected ? "text-white" : "text-stone-600"}
+                      className={selected ? "text-stone-800" : "text-stone-400"}
                     >
                       {tab.display}
                     </span>
