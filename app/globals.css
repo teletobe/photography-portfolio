@@ -33,3 +33,23 @@
     height: 100%;
   }
 }
+
+.tabPanelsContainer {
+  width: 100%; /* Default to 100% width */
+}
+
+@media (min-width: 1600px) {
+  .tabPanelsContainer {
+    width: 90%; /* Set width to 80% */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 0 10%; /* Set padding on left and right to 10% */
+  }
+}
+
+@media (min-width: 2000px) {
+  .tabPanelsContainer {
+    width: 80%; /* Set width to 80% */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 0 10%; /* Set padding on left and right to 10% */
+  }
+}

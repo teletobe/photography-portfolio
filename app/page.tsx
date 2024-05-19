@@ -4,6 +4,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { useState } from "react";
+import Masonry from "react-masonry-css";
+import classNames from "classnames";
 
 const tabs = [
   {
@@ -23,7 +25,7 @@ const tabs = [
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
-    <div className="flex flex-col h-full bg-[url('/photographer-bg.jpg')] bg-cover bg-bottom">
+    <div className="flex flex-col h-full bg-[url('/photographer-bg.jpg')] bg-cover bg-bottom overflow-auto">
       <Head>
         <title>Title for pages</title>
       </Head>
@@ -36,13 +38,13 @@ export default function Home() {
         </span>
         <Link
           href="#"
-          className="rounded-3xl bg-white text-stone-700 px-3 py-2 hover:bg-opacity-30"
+          className="rounded-3xl  bg-white text-stone-700 px-3 py-2 hover:bg-opacity-30"
         >
-          Get in touch
+          Contact
         </Link>
       </header>
 
-      <main className=" grow pt-[110px] w-full h-full z-10">
+      <main className="grow pt-[100px] w-full h-full z-10">
         <div className="flex flex-col  h-full w-full">
           <TabGroup className="h-full w-full">
             <TabList className="flex items-center justify-center gap-12">
@@ -50,7 +52,10 @@ export default function Home() {
                 <Tab key={tab.key} className="p-2">
                   {({ selected }) => (
                     <span
-                      className={selected ? "text-stone-800" : "text-stone-400"}
+                      className={classNames(
+                        "uppercase text-md",
+                        selected ? "text-stone-800" : "text-stone-400"
+                      )}
                     >
                       {tab.display}
                     </span>
@@ -58,9 +63,22 @@ export default function Home() {
                 </Tab>
               ))}
             </TabList>
-            <TabPanels className="flex gap-12 bg-stone-100 bg-opacity-60 p-2 h-full sm:p-4 my-6">
+            <TabPanels className="tabPanelsContainer flex gap-12 bg-opacity-60 p-2 h-full sm:p-4 my-6">
               <TabPanel>
-                <div className="">test</div>
+                <Masonry
+                  breakpointCols={3}
+                  className="flex gap-2"
+                  columnClassName=""
+                >
+                  <img src="/pics/all/pf1.jpg" alt="image-1" className="my-2" />
+                  <img src="/pics/all/pf2.jpg" alt="image-2" className="my-2" />
+                  <img src="/pics/all/pf3.jpg" alt="image-3" className="my-2" />
+                  <img src="/pics/all/pf4.jpg" alt="image-4" className="my-2" />
+                  <img src="/pics/all/pf5.jpg" alt="image-5" className="my-2" />
+                  <img src="/pics/all/pf6.jpg" alt="image-6" className="my-2" />
+                  <img src="/pics/all/pf7.jpg" alt="image-7" className="my-2" />
+                  <img src="/pics/all/pf8.jpg" alt="image-8" className="my-2" />
+                </Masonry>
               </TabPanel>
               <TabPanel>
                 <div className=""></div>
