@@ -28,22 +28,24 @@ export default function Home() {
         <title>Title for pages</title>
       </Head>
 
-      <header className="flex justify-between items-center h-[90px] px-6">
-        <div className="text-transparent">hm get in touch</div>
-        <div className="text-center">Portfolio</div>
+      <div className="fixed left-0 top-0 w-full h-full z-10 from-stone-50 bg-gradient-to-b"></div>
+
+      <header className="fixed top-0 w-full z-30 flex justify-between items-center h-[90px] px-10">
+        <span className="uppercase text-lg font-medium">
+          Photography Portfolio
+        </span>
         <Link
           href="#"
-          className="rounded-3xl bg-stone-100 px-3 py-2 hover:bg-opacity-30"
+          className="rounded-3xl bg-white text-stone-700 px-3 py-2 hover:bg-opacity-30"
         >
           Get in touch
         </Link>
       </header>
 
-      <main className="grow">
-        <div className="flex flex-col items-center">
-          <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-            {" "}
-            <TabList className="flex items-center gap-14">
+      <main className=" grow pt-[110px] w-full h-full z-10">
+        <div className="flex flex-col  h-full w-full">
+          <TabGroup className="h-full w-full">
+            <TabList className="flex items-center justify-center gap-12">
               {tabs.map((tab) => (
                 <Tab key={tab.key} className="p-2">
                   {({ selected }) => (
@@ -56,17 +58,23 @@ export default function Home() {
                 </Tab>
               ))}
             </TabList>
-            <TabPanels>
-              <TabPanel>All Photos</TabPanel>
-              <TabPanel>Portraits</TabPanel>
-              <TabPanel>Landscapes</TabPanel>
+            <TabPanels className="flex gap-12 bg-stone-100 bg-opacity-60 p-2 h-full sm:p-4 my-6">
+              <TabPanel>
+                <div className="">test</div>
+              </TabPanel>
+              <TabPanel>
+                <div className=""></div>
+              </TabPanel>
+              <TabPanel>
+                <div className=""></div>
+              </TabPanel>
             </TabPanels>
-          </TabGroup>{" "}
+          </TabGroup>
         </div>
       </main>
 
-      <footer className="h-[60px]">
-        <p>Placeholder</p>
+      <footer className="h-[80px] flex justify-center items-center uppercase text-lg font-medium z-20">
+        <p>Photography portfolio</p>
       </footer>
     </div>
   );
