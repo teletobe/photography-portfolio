@@ -7,7 +7,7 @@ export default function Home() {
       <Head>
         <title>Title for pages</title>
       </Head>
-      <main className="text-red-500">
+      <main>
         <p>Placeholder</p>
       </main>
       <footer>
