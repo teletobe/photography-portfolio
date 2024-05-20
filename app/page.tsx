@@ -31,7 +31,7 @@ const tabs = [
   },
 ];
 
-const images = [];
+const images = [image1, image2, image3, image4, image5, image6, image7, image8];
 
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -78,17 +78,18 @@ export default function Home() {
               <TabPanel>
                 <Masonry
                   breakpointCols={3}
-                  className="flex gap-3"
+                  className="flex gap-2"
                   columnClassName=""
                 >
-                  <Image src={image1} alt="placeholder" className="my-3" />
-                  <Image src={image2} alt="placeholder" className="my-3" />
-                  <Image src={image3} alt="placeholder" className="my-3" />
-                  <Image src={image4} alt="placeholder" className="my-3" />
-                  <Image src={image5} alt="placeholder" className="my-3" />
-                  <Image src={image6} alt="placeholder" className="my-3" />
-                  <Image src={image7} alt="placeholder" className="my-3" />
-                  <Image src={image8} alt="placeholder" className="my-3" />
+                  {images.map((image) => (
+                    <Image
+                      key={image.src}
+                      src={image}
+                      alt="placeholder"
+                      className="my-2"
+                      placeholder="blur"
+                    />
+                  ))}
 
                   {/*
                   <img src="/pics/all/pf1.jpg" alt="image-1" className="my-3" />
@@ -113,9 +114,11 @@ export default function Home() {
         </div>
       </main>
 
+      {/*
       <footer className="relative h-[90px] flex justify-center items-center uppercase text-lg font-medium z-20">
         <p>Photography portfolio</p>
       </footer>
+          */}
     </div>
   );
 }
