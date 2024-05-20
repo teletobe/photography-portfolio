@@ -126,9 +126,9 @@ export default function Home() {
                   className="flex gap-2"
                   columnClassName=""
                 >
-                  {images.map((image) => (
+                  {images.map((image, index) => (
                     <Image
-                      key={image.src}
+                      key={index}
                       src={image}
                       alt="placeholder"
                       className="my-2"
@@ -154,9 +154,9 @@ export default function Home() {
                   className="flex gap-2"
                   columnClassName=""
                 >
-                  {wienimages.map((image) => (
+                  {wienimages.map((image, index) => (
                     <Image
-                      key={image.src}
+                      key={index}
                       src={image}
                       alt="placeholder"
                       className="my-2"
@@ -182,9 +182,9 @@ export default function Home() {
                   className="flex gap-2"
                   columnClassName=""
                 >
-                  {bergimages.map((image) => (
+                  {bergimages.map((image, index) => (
                     <Image
-                      key={image.src}
+                      key={index}
                       src={image}
                       alt="placeholder"
                       className="my-2"
