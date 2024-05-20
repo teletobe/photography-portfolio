@@ -103,7 +103,7 @@ export default function Home() {
       <main className="grow pt-[100px] w-full h-full z-10">
         <div className="flex flex-col  h-full w-full">
           <TabGroup className="h-full w-full">
-            <TabList className="flex items-center justify-center gap-12">
+            <TabList className="flex items-center justify-center gap-5">
               {tabs.map((tab) => (
                 <Tab key={tab.key} className="p-2">
                   {({ selected }) => (
