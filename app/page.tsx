@@ -1,11 +1,20 @@
 "use client";
-import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { useState } from "react";
 import Masonry from "react-masonry-css";
 import classNames from "classnames";
+import Image from "next/image";
+
+import image1 from "../public/pics/all/pf1.jpg";
+import image2 from "../public/pics/all/pf2.jpg";
+import image3 from "../public/pics/all/pf3.jpg";
+import image4 from "../public/pics/all/pf4.jpg";
+import image5 from "../public/pics/all/pf5.jpg";
+import image6 from "../public/pics/all/pf6.jpg";
+import image7 from "../public/pics/all/pf7.jpg";
+import image8 from "../public/pics/all/pf8.jpg";
 
 const tabs = [
   {
@@ -22,10 +31,12 @@ const tabs = [
   },
 ];
 
+const images = [];
+
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
-    <div className="flex flex-col h-full bg-[url('/photographer-bg.jpg')] bg-cover bg-bottom overflow-auto">
+    <div className="flex flex-col h-full bg-cover bg-bottom overflow-auto">
       <Head>
         <title>Title for pages</title>
       </Head>
@@ -67,17 +78,28 @@ export default function Home() {
               <TabPanel>
                 <Masonry
                   breakpointCols={3}
-                  className="flex gap-2"
+                  className="flex gap-3"
                   columnClassName=""
                 >
-                  <img src="/pics/all/pf1.jpg" alt="image-1" className="my-2" />
-                  <img src="/pics/all/pf2.jpg" alt="image-2" className="my-2" />
-                  <img src="/pics/all/pf3.jpg" alt="image-3" className="my-2" />
-                  <img src="/pics/all/pf4.jpg" alt="image-4" className="my-2" />
-                  <img src="/pics/all/pf5.jpg" alt="image-5" className="my-2" />
-                  <img src="/pics/all/pf6.jpg" alt="image-6" className="my-2" />
-                  <img src="/pics/all/pf7.jpg" alt="image-7" className="my-2" />
-                  <img src="/pics/all/pf8.jpg" alt="image-8" className="my-2" />
+                  <Image src={image1} alt="placeholder" className="my-3" />
+                  <Image src={image2} alt="placeholder" className="my-3" />
+                  <Image src={image3} alt="placeholder" className="my-3" />
+                  <Image src={image4} alt="placeholder" className="my-3" />
+                  <Image src={image5} alt="placeholder" className="my-3" />
+                  <Image src={image6} alt="placeholder" className="my-3" />
+                  <Image src={image7} alt="placeholder" className="my-3" />
+                  <Image src={image8} alt="placeholder" className="my-3" />
+
+                  {/*
+                  <img src="/pics/all/pf1.jpg" alt="image-1" className="my-3" />
+                  <img src="/pics/all/pf2.jpg" alt="image-2" className="my-3" />
+                  <img src="/pics/all/pf3.jpg" alt="image-3" className="my-3" />
+                  <img src="/pics/all/pf4.jpg" alt="image-4" className="my-3" />
+                  <img src="/pics/all/pf5.jpg" alt="image-5" className="my-3" />
+                  <img src="/pics/all/pf6.jpg" alt="image-6" className="my-3" />
+                  <img src="/pics/all/pf7.jpg" alt="image-7" className="my-3" />
+                  <img src="/pics/all/pf8.jpg" alt="image-8" className="my-3" />
+            */}
                 </Masonry>
               </TabPanel>
               <TabPanel>
@@ -91,7 +113,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="h-[80px] flex justify-center items-center uppercase text-lg font-medium z-20">
+      <footer className="relative h-[90px] flex justify-center items-center uppercase text-lg font-medium z-20">
         <p>Photography portfolio</p>
       </footer>
     </div>
