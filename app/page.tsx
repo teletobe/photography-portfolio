@@ -2,51 +2,96 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import classNames from "classnames";
 import Image from "next/image";
 
-import image1 from "../public/pics/all/pf1.jpg";
-import image2 from "../public/pics/all/pf2.jpg";
-import image3 from "../public/pics/all/pf3.jpg";
-import image4 from "../public/pics/all/pf4.jpg";
-import image5 from "../public/pics/all/pf5.jpg";
-import image6 from "../public/pics/all/pf6.jpg";
-import image7 from "../public/pics/all/pf7.jpg";
-import image8 from "../public/pics/all/pf8.jpg";
-
 const tabs = [
   {
     key: "all",
-    display: "All",
+    display: "Portfolio",
   },
   {
-    key: "people",
-    display: "People",
+    key: "vienna",
+    display: "Vienna Chronicles",
   },
   {
-    key: "landscapes",
-    display: "Landscapes",
+    key: "Berg",
+    display: "Berg",
   },
 ];
 
-const images = [image1, image2, image3, image4, image5, image6, image7, image8];
-
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [images, setImages] = useState<string[]>([]); // Specify the type of initial state as string[]
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const loadedImages = [];
+      for (let i = 1; i <= 60; i++) {
+        try {
+          const image = await import(`../public/pics/all/pf${i}.jpg`);
+          loadedImages.push(image.default);
+        } catch (error) {
+          console.error(`Error loading image ${i}:`, error);
+        }
+      }
+      setImages(loadedImages);
+    };
+
+    fetchImages();
+  }, []);
+
+  const [wienimages, setWienImages] = useState<string[]>([]); // Specify the type of initial state as string[]
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const loadedImages = [];
+      for (let i = 1; i <= 45; i++) {
+        try {
+          const image = await import(`../public/pics/wien/wien${i}.jpg`);
+          loadedImages.push(image.default);
+        } catch (error) {
+          console.error(`Error loading image ${i}:`, error);
+        }
+      }
+      setWienImages(loadedImages);
+    };
+
+    fetchImages();
+  }, []);
+
+  const [bergimages, setBergImages] = useState<string[]>([]); // Specify the type of initial state as string[]
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const loadedImages = [];
+      for (let i = 1; i <= 94; i++) {
+        try {
+          const image = await import(`../public/pics/berg/berg${i}.jpg`);
+          loadedImages.push(image.default);
+        } catch (error) {
+          console.error(`Error loading image ${i}:`, error);
+        }
+      }
+      setBergImages(loadedImages);
+    };
+
+    fetchImages();
+  }, []);
+
   return (
     <div className="flex flex-col h-full bg-cover bg-bottom overflow-auto">
       <Head>
-        <title>Title for pages</title>
+        <title>Tobis portfoliooo</title>
       </Head>
 
       <div className="fixed left-0 top-0 w-full h-full z-10 from-stone-50 bg-gradient-to-b"></div>
 
       <header className="fixed top-0 w-full z-30 flex justify-between items-center h-[90px] px-10">
-        <span className="uppercase text-lg font-medium">
-          Photography Portfolio
-        </span>
+        <span className="uppercase text-lg font-medium">Tobi's Portfolio</span>
         <Link
           href="#"
           className="rounded-3xl  bg-white text-stone-700 px-3 py-2 hover:bg-opacity-30"
@@ -104,10 +149,60 @@ export default function Home() {
                 </Masonry>
               </TabPanel>
               <TabPanel>
-                <div className=""></div>
+                <Masonry
+                  breakpointCols={3}
+                  className="flex gap-2"
+                  columnClassName=""
+                >
+                  {wienimages.map((image) => (
+                    <Image
+                      key={image.src}
+                      src={image}
+                      alt="placeholder"
+                      className="my-2"
+                      placeholder="blur"
+                    />
+                  ))}
+
+                  {/*
+                  <img src="/pics/all/pf1.jpg" alt="image-1" className="my-3" />
+                  <img src="/pics/all/pf2.jpg" alt="image-2" className="my-3" />
+                  <img src="/pics/all/pf3.jpg" alt="image-3" className="my-3" />
+                  <img src="/pics/all/pf4.jpg" alt="image-4" className="my-3" />
+                  <img src="/pics/all/pf5.jpg" alt="image-5" className="my-3" />
+                  <img src="/pics/all/pf6.jpg" alt="image-6" className="my-3" />
+                  <img src="/pics/all/pf7.jpg" alt="image-7" className="my-3" />
+                  <img src="/pics/all/pf8.jpg" alt="image-8" className="my-3" />
+            */}
+                </Masonry>
               </TabPanel>
               <TabPanel>
-                <div className=""></div>
+                <Masonry
+                  breakpointCols={3}
+                  className="flex gap-2"
+                  columnClassName=""
+                >
+                  {bergimages.map((image) => (
+                    <Image
+                      key={image.src}
+                      src={image}
+                      alt="placeholder"
+                      className="my-2"
+                      placeholder="blur"
+                    />
+                  ))}
+
+                  {/*
+                  <img src="/pics/all/pf1.jpg" alt="image-1" className="my-3" />
+                  <img src="/pics/all/pf2.jpg" alt="image-2" className="my-3" />
+                  <img src="/pics/all/pf3.jpg" alt="image-3" className="my-3" />
+                  <img src="/pics/all/pf4.jpg" alt="image-4" className="my-3" />
+                  <img src="/pics/all/pf5.jpg" alt="image-5" className="my-3" />
+                  <img src="/pics/all/pf6.jpg" alt="image-6" className="my-3" />
+                  <img src="/pics/all/pf7.jpg" alt="image-7" className="my-3" />
+                  <img src="/pics/all/pf8.jpg" alt="image-8" className="my-3" />
+            */}
+                </Masonry>
               </TabPanel>
             </TabPanels>
           </TabGroup>
