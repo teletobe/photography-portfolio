@@ -122,7 +122,7 @@ export default function Home() {
             <TabPanels className="tabPanelsContainer flex gap-12 bg-opacity-60 p-2 h-full sm:p-4 my-6">
               <TabPanel>
                 <Masonry
-                  breakpointCols={3}
+                  breakpointCols={2}
                   className="flex gap-2"
                   columnClassName=""
                 >
@@ -150,7 +150,7 @@ export default function Home() {
               </TabPanel>
               <TabPanel>
                 <Masonry
-                  breakpointCols={3}
+                  breakpointCols={2}
                   className="flex gap-2"
                   columnClassName=""
                 >
@@ -178,7 +178,7 @@ export default function Home() {
               </TabPanel>
               <TabPanel>
                 <Masonry
-                  breakpointCols={3}
+                  breakpointCols={2}
                   className="flex gap-2"
                   columnClassName=""
                 >
