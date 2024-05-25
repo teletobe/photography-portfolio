@@ -77,7 +77,7 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 95; i++) {
+      for (let i = 1; i <= 98; i++) {
         try {
           const image = await import(`../public/pics/berg/berg${i}.jpg`);
           loadedImages.push(image.default);
@@ -96,7 +96,7 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 61; i++) {
+      for (let i = 1; i <= 66; i++) {
         try {
           const image = await import(
             `../public/pics/portraits/portrait${i}.jpg`
