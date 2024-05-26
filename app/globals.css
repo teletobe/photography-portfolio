@@ -54,8 +54,3 @@
     padding: 0 10%; /* Set padding on left and right to 10% */
   }
 }
-
-/* In your CSS file or styles section */
-.opacity-transition {
-  transition: opacity 3s ease; /* Adjust the duration here (e.g., 2s for 2 seconds) */
-}

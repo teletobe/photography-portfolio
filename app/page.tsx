@@ -117,11 +117,11 @@ export default function Home() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setFadeOut(true);
-    }, 1500);
+    }, 2000);
 
     const removeTimeout = setTimeout(() => {
       setShowWelcomeOverlay(false);
-    }, 4500);
+    }, 3000);
 
     return () => {
       clearTimeout(timeout);
@@ -135,14 +135,16 @@ export default function Home() {
         <title>Tobis portfoliooo</title>
       </Head>
 
-      <div
-        className={classNames(
-          "fixed inset-0 z-50 flex items-center justify-center bg-white opacity-transition",
-          { "opacity-0": fadeOut }
-        )}
-      >
-        <span className="text-2xl font-bold">Welcome!</span>
-      </div>
+      {showWelcomeOverlay && (
+        <div
+          className={classNames(
+            "fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-1000",
+            { "opacity-0": fadeOut }
+          )}
+        >
+          <span className="text-2xl font-bold">Welcome!</span>
+        </div>
+      )}
 
       <div className="fixed left-0 top-0 w-full h-full z-10 from-stone-50 bg-gradient-to-b"></div>
 
