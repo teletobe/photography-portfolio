@@ -33,6 +33,8 @@ export default function Home() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [activeTab, setActiveTab] = useState("all"); // Track the active tab separately
   const [otherTabSelected, setOtherTabSelected] = useState(true); // Track if the "Other" tab is selected
+  const [showWelcomeOverlay, setShowWelcomeOverlay] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
 
   const [images, setImages] = useState<string[]>([]); // Specify the type of initial state as string[]
 
@@ -112,28 +114,42 @@ export default function Home() {
     fetchImages();
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setFadeOut(true);
+    }, 1500);
+
+    const removeTimeout = setTimeout(() => {
+      setShowWelcomeOverlay(false);
+    }, 4500);
+
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(removeTimeout);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col h-full bg-cover bg-bottom overflow-auto">
       <Head>
         <title>Tobis portfoliooo</title>
       </Head>
 
+      <div
+        className={classNames(
+          "fixed inset-0 z-50 flex items-center justify-center bg-white opacity-transition",
+          { "opacity-0": fadeOut }
+        )}
+      >
+        <span className="text-2xl font-bold">Welcome!</span>
+      </div>
+
       <div className="fixed left-0 top-0 w-full h-full z-10 from-stone-50 bg-gradient-to-b"></div>
 
       <header className="fixed top-0 w-full z-30 flex justify-between items-center h-[90px] px-10">
         <span className="uppercase text-lg font-medium">Tobi's Portfolio</span>
         <div className="flex gap-3 pr-4">
-          <button
-            className={classNames(
-              "rounded-3xl bg-stone-200 text-black px-2 py-1 text-sm",
-              {
-                "bg-opacity-30": breakpointCols !== 1,
-              }
-            )}
-            onClick={() => setBreakpointCols(1)}
-          >
-            x1
-          </button>
+          <span className="text-sm py-1 ">columns:</span>
           <button
             className={classNames(
               "rounded-3xl bg-stone-200 text-black px-2 py-1 text-sm",
