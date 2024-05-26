@@ -2,10 +2,24 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Masonry from "react-masonry-css";
 import classNames from "classnames";
 import Image from "next/image";
+
+import type { LightGallery } from "lightgallery/lightgallery";
+import LightGalleryComponent from "lightgallery/react";
+
+// import styles
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+
+import img1 from "../public/APC_1150.jpg";
+import img2 from "../public/APC_1440.jpg";
 
 const tabs = [
   {
@@ -36,6 +50,8 @@ export default function Home() {
   const [showWelcomeOverlay, setShowWelcomeOverlay] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const lightboxRef = useRef<LightGallery | null>(null);
 
   const [images, setImages] = useState<string[]>([]); // Specify the type of initial state as string[]
 
@@ -309,11 +325,29 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2"
+                        className="my-2 hover:opacity-75 cursor-pointer"
                         placeholder="blur"
+                        onClick={() => {
+                          lightboxRef.current?.openGallery(index);
+                        }}
                       />
                     ))}
                   </Masonry>
+
+                  <LightGalleryComponent
+                    onInit={(ref) => {
+                      if (ref) {
+                        lightboxRef.current = ref.instance;
+                      }
+                    }}
+                    speed={500}
+                    plugins={[lgThumbnail, lgZoom]}
+                    dynamic
+                    dynamicEl={images.map((image) => ({
+                      src: image.src,
+                      thumb: image.src,
+                    }))}
+                  />
                 </TabPanel>
                 <TabPanel>
                   <Masonry
