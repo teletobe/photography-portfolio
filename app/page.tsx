@@ -325,7 +325,7 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2 hover:opacity-75 cursor-pointer"
+                        className="my-2 hover:opacity-85 cursor-pointer"
                         placeholder="blur"
                         onClick={() => {
                           lightboxRef.current?.openGallery(index);
@@ -366,11 +366,34 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2"
+                        className="my-2 hover:opacity-85 cursor-pointer"
                         placeholder="blur"
+                        onClick={() => {
+                          lightboxRef.current?.openGallery(index);
+                        }}
                       />
                     ))}
                   </Masonry>
+                  <LightGalleryComponent
+                    onInit={(ref) => {
+                      if (ref) {
+                        lightboxRef.current = ref.instance;
+                      }
+                    }}
+                    speed={500}
+                    plugins={[lgThumbnail, lgZoom]}
+                    dynamic
+                    dynamicEl={wienimages.map((image) => ({
+                      src:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                      thumb:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                    }))}
+                  />
                 </TabPanel>
                 <TabPanel>
                   <Masonry
@@ -383,11 +406,34 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2"
+                        className="my-2 hover:opacity-85 cursor-pointer"
                         placeholder="blur"
+                        onClick={() => {
+                          lightboxRef.current?.openGallery(index);
+                        }}
                       />
                     ))}
                   </Masonry>
+                  <LightGalleryComponent
+                    onInit={(ref) => {
+                      if (ref) {
+                        lightboxRef.current = ref.instance;
+                      }
+                    }}
+                    speed={500}
+                    plugins={[lgThumbnail, lgZoom]}
+                    dynamic
+                    dynamicEl={bergimages.map((image) => ({
+                      src:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                      thumb:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                    }))}
+                  />
                 </TabPanel>
                 <TabPanel>
                   <Masonry
@@ -400,11 +446,34 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2"
+                        className="my-2 hover:opacity-85 cursor-pointer"
                         placeholder="blur"
+                        onClick={() => {
+                          lightboxRef.current?.openGallery(index);
+                        }}
                       />
                     ))}
                   </Masonry>
+                  <LightGalleryComponent
+                    onInit={(ref) => {
+                      if (ref) {
+                        lightboxRef.current = ref.instance;
+                      }
+                    }}
+                    speed={500}
+                    plugins={[lgThumbnail, lgZoom]}
+                    dynamic
+                    dynamicEl={portraitimages.map((image) => ({
+                      src:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                      thumb:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                    }))}
+                  />
                 </TabPanel>
               </TabPanels>
             </TabGroup>
