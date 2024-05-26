@@ -43,7 +43,7 @@ export default function Home() {
     setIsLoading(true); // Set loading state to true initially
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 61; i++) {
+      for (let i = 1; i <= 66; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
           loadedImages.push(image.default);
@@ -101,7 +101,7 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 66; i++) {
+      for (let i = 1; i <= 61; i++) {
         try {
           const image = await import(
             `../public/pics/portraits/portrait${i}.jpg`
@@ -189,7 +189,7 @@ export default function Home() {
       <main className="grow pt-[100px] w-full h-full z-10">
         <div className="flex flex-col  h-full w-full">
           {isLoading ? (
-            <div className="flex items-center justify-center h-screen">
+            <div className="flex flex-col items-center justify-center h-screen">
               <div className="spinner"></div>
               <p>loading... &#40;beauty takes time hehe&#41;</p>
             </div>
