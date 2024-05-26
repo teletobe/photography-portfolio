@@ -344,8 +344,14 @@ export default function Home() {
                     plugins={[lgThumbnail, lgZoom]}
                     dynamic
                     dynamicEl={images.map((image) => ({
-                      src: image.src,
-                      thumb: image.src,
+                      src:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                      thumb:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
                     }))}
                   />
                 </TabPanel>
