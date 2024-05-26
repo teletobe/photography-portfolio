@@ -190,8 +190,8 @@ export default function Home() {
         <div className="flex flex-col  h-full w-full">
           {isLoading ? (
             <div className="flex items-center justify-center h-screen">
-              <p>Loading...</p>
-              {/* You can also add a spinner or loading animation here */}
+              <div className="spinner"></div>
+              <p>loading... &#40;beauty takes time hehe&#41;</p>
             </div>
           ) : (
             <TabGroup className="h-full w-full">
