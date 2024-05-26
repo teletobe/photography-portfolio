@@ -35,10 +35,12 @@ export default function Home() {
   const [otherTabSelected, setOtherTabSelected] = useState(true); // Track if the "Other" tab is selected
   const [showWelcomeOverlay, setShowWelcomeOverlay] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [images, setImages] = useState<string[]>([]); // Specify the type of initial state as string[]
 
   useEffect(() => {
+    setIsLoading(true); // Set loading state to true initially
     const fetchImages = async () => {
       const loadedImages = [];
       for (let i = 1; i <= 61; i++) {
@@ -50,6 +52,7 @@ export default function Home() {
         }
       }
       setImages(loadedImages);
+      setIsLoading(false); // Set loading state to false once images are fetched
     };
 
     fetchImages();
@@ -185,180 +188,187 @@ export default function Home() {
 
       <main className="grow pt-[100px] w-full h-full z-10">
         <div className="flex flex-col  h-full w-full">
-          <TabGroup className="h-full w-full">
-            <TabList className="flex items-center justify-center gap-5 pr-4">
-              <Tab
-                key="all"
-                className="p-2"
-                onClick={() => {
-                  setSelectedTab("all"), setShowDropdown(false);
-                }}
-              >
-                {({ selected }) => (
-                  <span
-                    className={classNames(
-                      "uppercase text-md ",
-                      selected ? "text-stone-800" : "text-stone-400"
-                    )}
+          {isLoading ? (
+            <div className="flex items-center justify-center h-screen">
+              <p>Loading...</p>
+              {/* You can also add a spinner or loading animation here */}
+            </div>
+          ) : (
+            <TabGroup className="h-full w-full">
+              <TabList className="flex items-center justify-center gap-5 pr-4">
+                <Tab
+                  key="all"
+                  className="p-2"
+                  onClick={() => {
+                    setSelectedTab("all"), setShowDropdown(false);
+                  }}
+                >
+                  {({ selected }) => (
+                    <span
+                      className={classNames(
+                        "uppercase text-md ",
+                        selected ? "text-stone-800" : "text-stone-400"
+                      )}
+                    >
+                      Portfolio
+                    </span>
+                  )}
+                </Tab>
+                <div className="relative">
+                  <button
+                    className={classNames("p-2 uppercase text-md", {
+                      "text-stone-800":
+                        showDropdown ||
+                        selectedIndex === 1 ||
+                        selectedIndex === 2,
+                      "text-stone-400": !(
+                        showDropdown ||
+                        selectedIndex === 1 ||
+                        selectedIndex === 2
+                      ),
+                    })}
+                    onClick={() => setShowDropdown((prev) => !prev)}
                   >
-                    Portfolio
-                  </span>
-                )}
-              </Tab>
-              <div className="relative">
-                <button
-                  className={classNames("p-2 uppercase text-md", {
-                    "text-stone-800":
-                      showDropdown ||
-                      selectedIndex === 1 ||
-                      selectedIndex === 2,
-                    "text-stone-400": !(
-                      showDropdown ||
-                      selectedIndex === 1 ||
-                      selectedIndex === 2
-                    ),
-                  })}
-                  onClick={() => setShowDropdown((prev) => !prev)}
-                >
-                  Other
-                </button>
-                {showDropdown && (
-                  <div className="absolute left-0 mt-2 w-full bg-white rounded-md shadow-lg">
-                    <div className="py-1">
-                      <Tab
-                        key="vienna"
-                        className="p-2"
-                        onClick={() => {
-                          setSelectedTab("vienna");
-                          setShowDropdown(false);
-                        }}
-                      >
-                        {({ selected }) => (
-                          <span
-                            className={classNames(
-                              "text-sm", // Adjusted text size
-                              selected ? "text-stone-800" : "text-stone-400"
-                            )}
-                          >
-                            Vienna
-                          </span>
-                        )}
-                      </Tab>
-                      <Tab
-                        key="berg"
-                        className="p-2"
-                        onClick={() => {
-                          setSelectedTab("berg");
-                          setShowDropdown(false);
-                        }}
-                      >
-                        {({ selected }) => (
-                          <span
-                            className={classNames(
-                              "text-sm", // Adjusted text size
-                              selected ? "text-stone-800" : "text-stone-400"
-                            )}
-                          >
-                            Berg
-                          </span>
-                        )}
-                      </Tab>
-                      <Tab
-                        key="portraits"
-                        className="p-2"
-                        onClick={() => {
-                          setSelectedTab("portraits");
-                          setShowDropdown(false);
-                        }}
-                      >
-                        {({ selected }) => (
-                          <span
-                            className={classNames(
-                              "text-sm", // Adjusted text size
-                              selected ? "text-stone-800" : "text-stone-400"
-                            )}
-                          >
-                            Portraits
-                          </span>
-                        )}
-                      </Tab>
+                    Other
+                  </button>
+                  {showDropdown && (
+                    <div className="absolute left-0 mt-2 w-full bg-white rounded-md shadow-lg">
+                      <div className="py-1">
+                        <Tab
+                          key="vienna"
+                          className="p-2"
+                          onClick={() => {
+                            setSelectedTab("vienna");
+                            setShowDropdown(false);
+                          }}
+                        >
+                          {({ selected }) => (
+                            <span
+                              className={classNames(
+                                "text-sm", // Adjusted text size
+                                selected ? "text-stone-800" : "text-stone-400"
+                              )}
+                            >
+                              Vienna
+                            </span>
+                          )}
+                        </Tab>
+                        <Tab
+                          key="berg"
+                          className="p-2"
+                          onClick={() => {
+                            setSelectedTab("berg");
+                            setShowDropdown(false);
+                          }}
+                        >
+                          {({ selected }) => (
+                            <span
+                              className={classNames(
+                                "text-sm", // Adjusted text size
+                                selected ? "text-stone-800" : "text-stone-400"
+                              )}
+                            >
+                              Berg
+                            </span>
+                          )}
+                        </Tab>
+                        <Tab
+                          key="portraits"
+                          className="p-2"
+                          onClick={() => {
+                            setSelectedTab("portraits");
+                            setShowDropdown(false);
+                          }}
+                        >
+                          {({ selected }) => (
+                            <span
+                              className={classNames(
+                                "text-sm", // Adjusted text size
+                                selected ? "text-stone-800" : "text-stone-400"
+                              )}
+                            >
+                              Portraits
+                            </span>
+                          )}
+                        </Tab>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </TabList>
+                  )}
+                </div>
+              </TabList>
 
-            <TabPanels className="tabPanelsContainer flex gap-12 bg-opacity-60 p-2 h-full sm:p-4 my-6">
-              <TabPanel>
-                <Masonry
-                  breakpointCols={breakpointCols}
-                  className="flex gap-2"
-                  columnClassName=""
-                >
-                  {images.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image}
-                      alt="placeholder"
-                      className="my-2"
-                      placeholder="blur"
-                    />
-                  ))}
-                </Masonry>
-              </TabPanel>
-              <TabPanel>
-                <Masonry
-                  breakpointCols={breakpointCols}
-                  className="flex gap-2"
-                  columnClassName=""
-                >
-                  {wienimages.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image}
-                      alt="placeholder"
-                      className="my-2"
-                      placeholder="blur"
-                    />
-                  ))}
-                </Masonry>
-              </TabPanel>
-              <TabPanel>
-                <Masonry
-                  breakpointCols={breakpointCols}
-                  className="flex gap-2"
-                  columnClassName=""
-                >
-                  {bergimages.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image}
-                      alt="placeholder"
-                      className="my-2"
-                      placeholder="blur"
-                    />
-                  ))}
-                </Masonry>
-              </TabPanel>
-              <TabPanel>
-                <Masonry
-                  breakpointCols={breakpointCols}
-                  className="flex gap-2"
-                  columnClassName=""
-                >
-                  {portraitimages.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image}
-                      alt="placeholder"
-                      className="my-2"
-                      placeholder="blur"
-                    />
-                  ))}
-                </Masonry>
-              </TabPanel>
-            </TabPanels>
-          </TabGroup>
+              <TabPanels className="tabPanelsContainer flex gap-12 bg-opacity-60 p-2 h-full sm:p-4 my-6">
+                <TabPanel>
+                  <Masonry
+                    breakpointCols={breakpointCols}
+                    className="flex gap-2"
+                    columnClassName=""
+                  >
+                    {images.map((image, index) => (
+                      <Image
+                        key={index}
+                        src={image}
+                        alt="placeholder"
+                        className="my-2"
+                        placeholder="blur"
+                      />
+                    ))}
+                  </Masonry>
+                </TabPanel>
+                <TabPanel>
+                  <Masonry
+                    breakpointCols={breakpointCols}
+                    className="flex gap-2"
+                    columnClassName=""
+                  >
+                    {wienimages.map((image, index) => (
+                      <Image
+                        key={index}
+                        src={image}
+                        alt="placeholder"
+                        className="my-2"
+                        placeholder="blur"
+                      />
+                    ))}
+                  </Masonry>
+                </TabPanel>
+                <TabPanel>
+                  <Masonry
+                    breakpointCols={breakpointCols}
+                    className="flex gap-2"
+                    columnClassName=""
+                  >
+                    {bergimages.map((image, index) => (
+                      <Image
+                        key={index}
+                        src={image}
+                        alt="placeholder"
+                        className="my-2"
+                        placeholder="blur"
+                      />
+                    ))}
+                  </Masonry>
+                </TabPanel>
+                <TabPanel>
+                  <Masonry
+                    breakpointCols={breakpointCols}
+                    className="flex gap-2"
+                    columnClassName=""
+                  >
+                    {portraitimages.map((image, index) => (
+                      <Image
+                        key={index}
+                        src={image}
+                        alt="placeholder"
+                        className="my-2"
+                        placeholder="blur"
+                      />
+                    ))}
+                  </Masonry>
+                </TabPanel>
+              </TabPanels>
+            </TabGroup>
+          )}
         </div>
       </main>
 
