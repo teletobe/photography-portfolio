@@ -59,7 +59,7 @@ export default function Home() {
     setIsLoading(true); // Set loading state to true initially
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 66; i++) {
+      for (let i = 1; i <= 68; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
           loadedImages.push(image.default);
@@ -203,7 +203,7 @@ export default function Home() {
       </header>
 
       <main className="grow pt-[100px] w-full h-full z-10">
-        <div className="flex flex-col  h-full w-full">
+        <div className="contentInner flex flex-col  h-full w-full">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center h-screen">
               <div className="spinner"></div>
