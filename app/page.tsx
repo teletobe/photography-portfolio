@@ -38,6 +38,10 @@ const tabs = [
     key: "portraits",
     display: "Portraitss",
   },
+  {
+    key: "japan",
+    display: "Japan",
+  },
 ];
 
 export default function Home() {
@@ -133,6 +137,25 @@ export default function Home() {
     fetchImages();
   }, []);
 
+  const [japanimages, setJapanImages] = useState<string[]>([]); // Specify the type of initial state as string[]
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const loadedImages = [];
+      for (let i = 1; i <= 61; i++) {
+        try {
+          const image = await import(`../public/pics/japan/japan${i}.jpg`);
+          loadedImages.push(image.default);
+        } catch (error) {
+          console.error(`Error loading image ${i}:`, error);
+        }
+      }
+      setJapanImages(loadedImages);
+    };
+
+    fetchImages();
+  }, []);
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setFadeOut(true);
@@ -207,7 +230,7 @@ export default function Home() {
           {isLoading ? (
             <div className="flex flex-col items-center justify-center h-screen">
               <div className="spinner"></div>
-              <p>loading... &#40;beauty takes time hehe&#41;</p>
+              <p>loading... &#40;ikik sry needs optimising&#41;</p>
             </div>
           ) : (
             <TabGroup className="h-full w-full">
@@ -304,6 +327,25 @@ export default function Home() {
                               )}
                             >
                               Portraits
+                            </span>
+                          )}
+                        </Tab>
+                        <Tab
+                          key="japan"
+                          className="p-2"
+                          onClick={() => {
+                            setSelectedTab("japan");
+                            setShowDropdown(false);
+                          }}
+                        >
+                          {({ selected }) => (
+                            <span
+                              className={classNames(
+                                "text-sm", // Adjusted text size
+                                selected ? "text-stone-800" : "text-stone-400"
+                              )}
+                            >
+                              Japan
                             </span>
                           )}
                         </Tab>
@@ -464,6 +506,46 @@ export default function Home() {
                     plugins={[lgThumbnail, lgZoom]}
                     dynamic
                     dynamicEl={portraitimages.map((image) => ({
+                      src:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                      thumb:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                    }))}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <Masonry
+                    breakpointCols={breakpointCols}
+                    className="flex gap-2"
+                    columnClassName=""
+                  >
+                    {japanimages.map((image, index) => (
+                      <Image
+                        key={index}
+                        src={image}
+                        alt="placeholder"
+                        className="my-2 hover:opacity-85 cursor-pointer"
+                        placeholder="blur"
+                        onClick={() => {
+                          lightboxRef.current?.openGallery(index);
+                        }}
+                      />
+                    ))}
+                  </Masonry>
+                  <LightGalleryComponent
+                    onInit={(ref) => {
+                      if (ref) {
+                        lightboxRef.current = ref.instance;
+                      }
+                    }}
+                    speed={500}
+                    plugins={[lgThumbnail, lgZoom]}
+                    dynamic
+                    dynamicEl={japanimages.map((image) => ({
                       src:
                         typeof image === "string"
                           ? image

@@ -18,6 +18,7 @@ const tabs = [
   { key: "vienna", display: "Vienna Chronicles" },
   { key: "berg", display: "Berg" },
   { key: "portraits", display: "Portraits" },
+  { key: "japan", display: "Japan" },
 ];
 
 export default function Other() {
@@ -27,6 +28,7 @@ export default function Other() {
   const [wienimages, setWienImages] = useState<string[]>([]);
   const [bergimages, setBergImages] = useState<string[]>([]);
   const [portraitimages, setPortraitImages] = useState<string[]>([]);
+  const [japanimages, setJapanImages] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchImages = async (
@@ -49,6 +51,7 @@ export default function Other() {
     fetchImages("wien", setWienImages, 45);
     fetchImages("berg", setBergImages, 98);
     fetchImages("portraits", setPortraitImages, 61);
+    fetchImages("japan", setJapanImages, 160);
   }, []);
 
   return (
@@ -176,6 +179,40 @@ export default function Other() {
                   plugins={[lgThumbnail, lgZoom]}
                   dynamic
                   dynamicEl={portraitimages.map((image) => ({
+                    src: image,
+                    thumb: image,
+                  }))}
+                />
+              </TabPanel>
+              <TabPanel>
+                <Masonry
+                  breakpointCols={breakpointCols}
+                  className="flex gap-2"
+                  columnClassName=""
+                >
+                  {portraitimages.map((image, index) => (
+                    <Image
+                      key={index}
+                      src={image}
+                      alt="Japan"
+                      className="my-2 hover:opacity-85 cursor-pointer"
+                      placeholder="blur"
+                      onClick={() => {
+                        lightboxRef.current?.openGallery(index);
+                      }}
+                    />
+                  ))}
+                </Masonry>
+                <LightGalleryComponent
+                  onInit={(ref) => {
+                    if (ref) {
+                      lightboxRef.current = ref.instance;
+                    }
+                  }}
+                  speed={500}
+                  plugins={[lgThumbnail, lgZoom]}
+                  dynamic
+                  dynamicEl={japanimages.map((image) => ({
                     src: image,
                     thumb: image,
                   }))}
