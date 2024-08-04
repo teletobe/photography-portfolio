@@ -36,7 +36,7 @@ const tabs = [
   },
   {
     key: "portraits",
-    display: "Portraits",
+    display: "Portraitss",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function Home() {
     setIsLoading(true); // Set loading state to true initially
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 68; i++) {
+      for (let i = 1; i <= 85; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
           loadedImages.push(image.default);
