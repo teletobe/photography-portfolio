@@ -405,7 +405,7 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2 hover:opacity-85 cursor-pointer"
+                        className="my-2 hover:opacity-95 cursor-pointer"
                         placeholder="blur"
                         loading="lazy" // Lazy load images
                         onClick={() => {
@@ -452,7 +452,7 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2 hover:opacity-85 cursor-pointer"
+                        className="my-2 hover:opacity-95 cursor-pointer"
                         placeholder="blur"
                         loading="lazy" // Lazy load images
                         onClick={() => {
@@ -493,7 +493,7 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2 hover:opacity-85 cursor-pointer"
+                        className="my-2 hover:opacity-95 cursor-pointer"
                         placeholder="blur"
                         loading="lazy" // Lazy load images
                         onClick={() => {
@@ -534,7 +534,7 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2 hover:opacity-85 cursor-pointer"
+                        className="my-2 hover:opacity-95 cursor-pointer"
                         placeholder="blur"
                         loading="lazy" // Lazy load images
                         onClick={() => {
@@ -575,7 +575,7 @@ export default function Home() {
                         key={index}
                         src={image}
                         alt="placeholder"
-                        className="my-2 hover:opacity-85 cursor-pointer"
+                        className="my-2 hover:opacity-95 cursor-pointer"
                         placeholder="blur"
                         loading="lazy" // Lazy load images
                         onClick={() => {
