@@ -61,7 +61,7 @@ export default function Home() {
     };
 
     const loadRemainingImages = async () => {
-      const remainingImages = [];
+      const remainingImages: any[] = [];
       for (let i = 6; i <= 85; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
