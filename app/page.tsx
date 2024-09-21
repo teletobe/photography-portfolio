@@ -63,7 +63,7 @@ export default function Home() {
     const loadInitialImages = async () => {
       setIsLoading(true); // Show loading
       const initialImages = [];
-      for (let i = 1; i <= 10; i++) {
+      for (let i = 1; i <= 12; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
           initialImages.push(image.default);
@@ -77,7 +77,7 @@ export default function Home() {
 
     const loadRemainingImages = async () => {
       const remainingImages: any[] = [];
-      for (let i = 11; i <= 85; i++) {
+      for (let i = 13; i <= 89; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
           remainingImages.push(image.default);
