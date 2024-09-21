@@ -54,6 +54,7 @@ export default function Home() {
   const [showWelcomeOverlay, setShowWelcomeOverlay] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRemainingLoading, setIsRemainingLoading] = useState(true); // Track remaining images loading
 
   const lightboxRef = useRef<LightGallery | null>(null);
 
@@ -86,6 +87,7 @@ export default function Home() {
         }
       }
       setImages((prevImages) => [...prevImages, ...remainingImages]); // Append remaining images
+      setIsRemainingLoading(false); // All remaining images are loaded
     };
 
     loadInitialImages(); // Prioritize first 5 images
@@ -412,7 +414,12 @@ export default function Home() {
                       />
                     ))}
                   </Masonry>
-
+                  {/* Show loading under the images while remaining ones load */}
+                  {isRemainingLoading && (
+                    <div className="flex justify-center py-4">
+                      <p>Loading more images...</p>
+                    </div>
+                  )}
                   <LightGalleryComponent
                     onInit={(ref) => {
                       if (ref) {
