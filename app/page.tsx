@@ -230,7 +230,7 @@ export default function Home() {
           {isLoading ? (
             <div className="flex flex-col items-center justify-center h-screen">
               <div className="spinner"></div>
-              <p>loading... &#40;ikik sry needs optimising&#41;</p>
+              <p>loading...</p>
             </div>
           ) : (
             <TabGroup className="h-full w-full">
