@@ -78,7 +78,7 @@ export default function Home() {
 
     const loadRemainingImages = async () => {
       const remainingImages: any[] = [];
-      for (let i = 14; i <= 91; i++) {
+      for (let i = 14; i <= 94; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
           remainingImages.push(image.default);
@@ -94,25 +94,45 @@ export default function Home() {
     loadRemainingImages(); // Load the rest in the background
   }, []);
 
-  /*
-    
+  const [otherImages, setOtherImages] = useState<string[]>([]); // Specify the type of initial state as string[]
+
+  useEffect(() => {
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 85; i++) {
+      for (let i = 1; i <= 98; i++) {
         try {
-          const image = await import(`../public/pics/all/pf${i}.jpg`);
+          const image = await import(`../public/pics/berg/berg${i}.jpg`);
           loadedImages.push(image.default);
         } catch (error) {
           console.error(`Error loading image ${i}:`, error);
         }
       }
-      setImages(loadedImages);
-      setIsLoading(false); // Set loading state to false once images are fetched
+      setOtherImages(loadedImages);
     };
 
     fetchImages();
   }, []);
-*/
+
+  const [artImages, setArtImages] = useState<string[]>([]); // Specify the type of initial state as string[]
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const loadedImages = [];
+      for (let i = 1; i <= 14; i++) {
+        try {
+          const image = await import(`../public/pics/art/art${i}.jpg`);
+          loadedImages.push(image.default);
+        } catch (error) {
+          console.error(`Error loading image ${i}:`, error);
+        }
+      }
+      setArtImages(loadedImages);
+    };
+
+    fetchImages();
+  }, []);
+
+  /* 
   const [wienimages, setWienImages] = useState<string[]>([]); // Specify the type of initial state as string[]
 
   useEffect(() => {
@@ -150,6 +170,7 @@ export default function Home() {
 
     fetchImages();
   }, []);
+  */
 
   const [portraitimages, setPortraitImages] = useState<string[]>([]); // Specify the type of initial state as string[]
 
@@ -172,6 +193,7 @@ export default function Home() {
     fetchImages();
   }, []);
 
+  /*
   const [japanimages, setJapanImages] = useState<string[]>([]); // Specify the type of initial state as string[]
 
   useEffect(() => {
@@ -190,6 +212,8 @@ export default function Home() {
 
     fetchImages();
   }, []);
+
+  */
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -255,12 +279,7 @@ export default function Home() {
             x3
           </button>
         </div>
-        {/*<Link
-          href="#"
-          className="rounded-3xl bg-white text-stone-700 px-3 py-2 hover:bg-opacity-30"
-        >
-          Contact
-          </Link>*/}
+        {}
       </header>
 
       <main className="grow pt-[100px] w-full h-full z-10">
@@ -312,10 +331,10 @@ export default function Home() {
                     <div className="absolute left-0 mt-2 w-full bg-white rounded-md shadow-lg">
                       <div className="py-1">
                         <Tab
-                          key="vienna"
+                          key="others"
                           className="p-2"
                           onClick={() => {
-                            setSelectedTab("vienna");
+                            setSelectedTab("others");
                             setShowDropdown(false);
                           }}
                         >
@@ -326,15 +345,15 @@ export default function Home() {
                                 selected ? "text-stone-800" : "text-stone-400"
                               )}
                             >
-                              Vienna
+                              Others
                             </span>
                           )}
                         </Tab>
                         <Tab
-                          key="berg"
+                          key="art"
                           className="p-2"
                           onClick={() => {
-                            setSelectedTab("berg");
+                            setSelectedTab("art");
                             setShowDropdown(false);
                           }}
                         >
@@ -345,7 +364,7 @@ export default function Home() {
                                 selected ? "text-stone-800" : "text-stone-400"
                               )}
                             >
-                              Berg
+                              concept
                             </span>
                           )}
                         </Tab>
@@ -365,25 +384,6 @@ export default function Home() {
                               )}
                             >
                               Portraits
-                            </span>
-                          )}
-                        </Tab>
-                        <Tab
-                          key="japan"
-                          className="p-2"
-                          onClick={() => {
-                            setSelectedTab("japan");
-                            setShowDropdown(false);
-                          }}
-                        >
-                          {({ selected }) => (
-                            <span
-                              className={classNames(
-                                "text-sm", // Adjusted text size
-                                selected ? "text-stone-800" : "text-stone-400"
-                              )}
-                            >
-                              Japan
                             </span>
                           )}
                         </Tab>
@@ -447,7 +447,7 @@ export default function Home() {
                     className="flex gap-2"
                     columnClassName=""
                   >
-                    {wienimages.map((image, index) => (
+                    {otherImages.map((image, index) => (
                       <Image
                         key={index}
                         src={image}
@@ -470,7 +470,7 @@ export default function Home() {
                     speed={500}
                     plugins={[lgThumbnail, lgZoom]}
                     dynamic
-                    dynamicEl={wienimages.map((image) => ({
+                    dynamicEl={otherImages.map((image) => ({
                       src:
                         typeof image === "string"
                           ? image
@@ -488,7 +488,7 @@ export default function Home() {
                     className="flex gap-2"
                     columnClassName=""
                   >
-                    {bergimages.map((image, index) => (
+                    {artImages.map((image, index) => (
                       <Image
                         key={index}
                         src={image}
@@ -511,7 +511,7 @@ export default function Home() {
                     speed={500}
                     plugins={[lgThumbnail, lgZoom]}
                     dynamic
-                    dynamicEl={bergimages.map((image) => ({
+                    dynamicEl={artImages.map((image) => ({
                       src:
                         typeof image === "string"
                           ? image
@@ -553,47 +553,6 @@ export default function Home() {
                     plugins={[lgThumbnail, lgZoom]}
                     dynamic
                     dynamicEl={portraitimages.map((image) => ({
-                      src:
-                        typeof image === "string"
-                          ? image
-                          : (image as { src: string }).src,
-                      thumb:
-                        typeof image === "string"
-                          ? image
-                          : (image as { src: string }).src,
-                    }))}
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <Masonry
-                    breakpointCols={breakpointCols}
-                    className="flex gap-2"
-                    columnClassName=""
-                  >
-                    {japanimages.map((image, index) => (
-                      <Image
-                        key={index}
-                        src={image}
-                        alt="placeholder"
-                        className="my-2 hover:opacity-95 cursor-pointer"
-                        placeholder="blur"
-                        loading="lazy" // Lazy load images
-                        onClick={() => {
-                          lightboxRef.current?.openGallery(index);
-                        }}
-                      />
-                    ))}
-                  </Masonry>
-                  <LightGalleryComponent
-                    onInit={(ref) => {
-                      if (ref) {
-                        lightboxRef.current = ref.instance;
-                      }
-                    }}
-                    speed={500}
-                    plugins={[lgThumbnail, lgZoom]}
-                    dynamic
-                    dynamicEl={japanimages.map((image) => ({
                       src:
                         typeof image === "string"
                           ? image
