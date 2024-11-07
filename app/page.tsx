@@ -345,7 +345,7 @@ export default function Home() {
                                 selected ? "text-stone-800" : "text-stone-400"
                               )}
                             >
-                              Others
+                              b-roll
                             </span>
                           )}
                         </Tab>
@@ -383,7 +383,7 @@ export default function Home() {
                                 selected ? "text-stone-800" : "text-stone-400"
                               )}
                             >
-                              Portraits
+                              people
                             </span>
                           )}
                         </Tab>
