@@ -54,6 +54,7 @@ export default function Home() {
   const [showWelcomeOverlay, setShowWelcomeOverlay] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingBetween, setIsLoadingBetween] = useState(true);
   const [isRemainingLoading, setIsRemainingLoading] = useState(true); // Track remaining images loading
 
   const lightboxRef = useRef<LightGallery | null>(null);
@@ -76,9 +77,24 @@ export default function Home() {
       setIsLoading(false); // Hide loading
     };
 
+    const loadBetweenImages = async () => {
+      //setIsLoadingBetween(true); // Show loading
+      const betweenImages: any[] = [];
+      for (let i = 14; i <= 24; i++) {
+        try {
+          const image = await import(`../public/pics/all/pf${i}.jpg`);
+          betweenImages.push(image.default);
+        } catch (error) {
+          console.error(`Error loading image ${i}:`, error);
+        }
+      }
+      setImages(betweenImages); // Set initial images
+      setIsLoadingBetween(false); // Hide loading
+    };
+
     const loadRemainingImages = async () => {
       const remainingImages: any[] = [];
-      for (let i = 14; i <= 94; i++) {
+      for (let i = 14; i <= 96; i++) {
         try {
           const image = await import(`../public/pics/all/pf${i}.jpg`);
           remainingImages.push(image.default);
@@ -91,6 +107,7 @@ export default function Home() {
     };
 
     loadInitialImages(); // Prioritize first 5 images
+    loadBetweenImages();
     loadRemainingImages(); // Load the rest in the background
   }, []);
 
@@ -177,7 +194,7 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 61; i++) {
+      for (let i = 1; i <= 62; i++) {
         try {
           const image = await import(
             `../public/pics/portraits/portrait${i}.jpg`
