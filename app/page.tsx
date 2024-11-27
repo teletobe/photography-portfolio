@@ -42,6 +42,10 @@ const tabs = [
     key: "japan",
     display: "Japan",
   },
+  {
+    key: "street",
+    display: "Street",
+  },
 ];
 
 export default function Home() {
@@ -135,7 +139,7 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       const loadedImages = [];
-      for (let i = 1; i <= 16; i++) {
+      for (let i = 1; i <= 17; i++) {
         try {
           const image = await import(`../public/pics/art/art${i}.jpg`);
           loadedImages.push(image.default);
@@ -144,6 +148,25 @@ export default function Home() {
         }
       }
       setArtImages(loadedImages);
+    };
+
+    fetchImages();
+  }, []);
+
+  const [streetImages, setStreetImages] = useState<string[]>([]); // Specify the type of initial state as string[]
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const loadedImages = [];
+      for (let i = 1; i <= 22; i++) {
+        try {
+          const image = await import(`../public/pics/street/street${i}.jpg`);
+          loadedImages.push(image.default);
+        } catch (error) {
+          console.error(`Error loading image ${i}:`, error);
+        }
+      }
+      setStreetImages(loadedImages);
     };
 
     fetchImages();
@@ -386,6 +409,25 @@ export default function Home() {
                           )}
                         </Tab>
                         <Tab
+                          key="street"
+                          className="p-2"
+                          onClick={() => {
+                            setSelectedTab("street");
+                            setShowDropdown(false);
+                          }}
+                        >
+                          {({ selected }) => (
+                            <span
+                              className={classNames(
+                                "text-sm", // Adjusted text size
+                                selected ? "text-stone-800" : "text-stone-400"
+                              )}
+                            >
+                              street
+                            </span>
+                          )}
+                        </Tab>
+                        <Tab
                           key="portraits"
                           className="p-2"
                           onClick={() => {
@@ -529,6 +571,47 @@ export default function Home() {
                     plugins={[lgThumbnail, lgZoom]}
                     dynamic
                     dynamicEl={artImages.map((image) => ({
+                      src:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                      thumb:
+                        typeof image === "string"
+                          ? image
+                          : (image as { src: string }).src,
+                    }))}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <Masonry
+                    breakpointCols={breakpointCols}
+                    className="flex gap-2"
+                    columnClassName=""
+                  >
+                    {streetImages.map((image, index) => (
+                      <Image
+                        key={index}
+                        src={image}
+                        alt="placeholder"
+                        className="my-2 hover:opacity-95 cursor-pointer"
+                        placeholder="blur"
+                        loading="lazy" // Lazy load images
+                        onClick={() => {
+                          lightboxRef.current?.openGallery(index);
+                        }}
+                      />
+                    ))}
+                  </Masonry>
+                  <LightGalleryComponent
+                    onInit={(ref) => {
+                      if (ref) {
+                        lightboxRef.current = ref.instance;
+                      }
+                    }}
+                    speed={500}
+                    plugins={[lgThumbnail, lgZoom]}
+                    dynamic
+                    dynamicEl={streetImages.map((image) => ({
                       src:
                         typeof image === "string"
                           ? image
