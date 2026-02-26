@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tobi's Photography Portfolio
+
+This is my photography portfolio built with Next.js. It features a masonry image grid with a lightbox viewer, split across multiple gallery categories.
+
+## Features
+
+- **Portfolio** — main gallery showcasing a curated selection of photos
+- **Other** — dropdown with additional category galleries:
+  - b-roll
+  - concept
+  - street
+  - people
+- Masonry grid layout with switchable 2 or 3 column view
+- Lightbox with zoom and thumbnail strip (via LightGallery)
+- Progressive image loading — initial images load first, rest load in the background
+
+## Project Structure
+
+```
+app/
+  app/
+    page.tsx              # Main page, wires everything together
+    components/
+      Header.tsx          # Top nav bar with column switcher
+      TabNavigation.tsx   # Tab list with "Other" dropdown
+      ImageGallery.tsx    # Reusable masonry grid + lightbox
+      WelcomeOverlay.tsx  # Fade-in welcome screen on first load
+    hooks/
+      useImages.ts        # Custom hooks for loading each image category
+  public/
+    pics/                 # All photo assets organised by category
+```
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Other Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run build   # Build for production
+npm run start   # Serve the production build
+npm run lint    # Run ESLint
+```
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Next.js 14](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Headless UI](https://headlessui.com/) — accessible tab components
+- [LightGallery](https://www.lightgalleryjs.com/) — lightbox with zoom and thumbnails
+- [react-masonry-css](https://github.com/paulcollett/react-masonry-css) — masonry grid layout
