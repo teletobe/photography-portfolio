@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Darkroom — Tobi's Photography</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="darkroom.css" />
+  </head>
+  <body>
+    <div id="loader">
+      <div id="loader-icon">🔴</div>
+      <div id="loader-title">DARKROOM</div>
+      <div id="loader-sub">loading scene</div>
+      <div id="loader-bar-wrap"><div id="loader-bar"></div></div>
+    </div>
+
+    <div id="pano"></div>
+    <div id="vignette"></div>
+    <div id="safelight"></div>
+
+    <div class="nav-zone" id="nav-left" onclick="navigate(-1)">
+      <div class="nav-inner">
+        <div class="nav-arrow">◄</div>
+        <div class="nav-label" id="prev-name">—</div>
+      </div>
+    </div>
+
+    <div class="nav-zone" id="nav-right" onclick="navigate(1)">
+      <div class="nav-inner">
+        <div class="nav-arrow">►</div>
+        <div class="nav-label" id="next-name">—</div>
+      </div>
+    </div>
+
+    <div id="topbar">
+      <div id="topbar-title">DARKROOM</div>
+      <div id="topbar-right">← → to explore</div>
+    </div>
+
+    <button
+      id="welcome-text"
+      onclick="document.getElementById('inspiration-modal').classList.add('visible')"
+    >
+      <span>ARTISTS I LIKE</span>
+    </button>
+
+    <button
+      id="portfolio-btn"
+      onclick="window.openPortfolioReader && window.openPortfolioReader()"
+    >
+      <span>OPEN MY PORTFOLIO</span>
+    </button>
+
+    <button
+      id="gear-btn"
+      onclick="document.getElementById('gear-modal').classList.add('visible')"
+    >
+      <span>GEAR TALK</span>
+    </button>
+
+    <button
+      id="zines-btn"
+      onclick="window.openZineCarousel && window.openZineCarousel()"
+    >
+      <span>BROWSE MY ALBUMS</span>
+    </button>
+
+    <div id="gear-modal">
+      <div id="gear-modal-box">
+        <button
+          id="gear-modal-close"
+          onclick="document.getElementById('gear-modal').classList.remove('visible')"
+          aria-label="Close"
+        >
+          ×
+        </button>
+        <div id="gear-modal-content">
+          <p>I'm currently shooting mostly digital, for that I'm using an X-Pro 3. My lens of choice is the rather old 35mm 1.4, sometimes with a 1/4 diffusion filter. I love small lenses, so I also have a 18mm f2, and the 27mm 2.8.</p>
+          <p>Analogue equipment still includes an Olympus Mju-1 which I adore, and a beautiful black Yashica Electro 35 GT (but not 100% sure if the shutter is working perfectly on that one, woops).</p>
+          <p>I love to talk about photography equipment, and I've had a few cameras in the past. Started in analogue with Minoltas and digitally with Sony APC cameras and their A7 lineup. Had a Canon phase and the RP with an L lens for a while. That felt very professional but also way too heavy to carry around, so I was really happy when I discovered Fuji's lineup and smaller cameras. But at the end of the day, I learned that I don't really care too much about the specs, rather that a camera feels good and is fun to shoot. Because ultimately, that's what makes one go out and take photos!</p>
+          <p>(I've also been asked a lot by friends what I would recommend for beginners and might just add a brief guide here in the future so I can point people to it whenever they ask)</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="inspiration-modal">
+      <div id="inspiration-modal-box">
+        <button
+          id="inspiration-modal-close"
+          onclick="document.getElementById('inspiration-modal').classList.remove('visible')"
+          aria-label="Close"
+        >
+          ×
+        </button>
+        <div id="inspiration-modal-body">
+          <div id="inspiration-modal-content">
+            <p class="insp-heading">INSTAGRAM</p>
+            <ul>
+              <li><a href="https://www.instagram.com/arnold_daniel/" target="_blank" rel="noopener">Daniel Arnold</a> — the best out there</li>
+              <li><a href="https://www.instagram.com/flo_pernet/" target="_blank" rel="noopener">Florence Pernet</a> — sports and colours</li>
+              <li><a href="https://www.instagram.com/paeulini/" target="_blank" rel="noopener">Chantal Convertini</a> — intimate portraits</li>
+            </ul>
+            <p class="insp-heading">YOUTUBE</p>
+            <ul>
+              <li><a href="https://www.youtube.com/@andrewtkearns" target="_blank" rel="noopener">Andrew T Kearns</a> — landscape</li>
+              <li><a href="https://www.youtube.com/@ioegreer" target="_blank" rel="noopener">Joe Greer</a> — just good content</li>
+              <li><a href="https://www.youtube.com/@theartofphotography" target="_blank" rel="noopener">Ted Forbes</a> — his vids were my photo classes</li>
+              <li><a href="https://www.youtube.com/@TatianaHopper" target="_blank" rel="noopener">Tatiana Hopper</a> — also good for learning</li>
+              <li><a href="https://www.youtube.com/@teocrawford" target="_blank" rel="noopener">Teo Crawford</a> — pretty, relaxing artsy photography vids</li>
+              <li><a href="https://www.youtube.com/@PaulieB" target="_blank" rel="noopener">Paulie B</a> — 'a day with' is the best interview series</li>
+              <li><a href="https://www.youtube.com/watch?v=iNJFmwPXSdI" target="_blank" rel="noopener">Grainydays</a> — sarcastic easy phototalk</li>
+              <li><a href="https://www.youtube.com/@KaiManWong" target="_blank" rel="noopener">Kai Wong</a> — the OG, gear talk mostly</li>
+            </ul>
+            <p class="insp-heading">MAGAZINES</p>
+            <ul>
+              <li><a href="http://negativefeedback.co.uk" target="_blank" rel="noopener">Negative Feedback</a> — film magazine and yt channel from the uk</li>
+            </ul>
+            <p class="insp-heading">FAVOURITE GALLERY</p>
+            <ul>
+              <li><a href="https://stockholm.fotografiska.com/en" target="_blank" rel="noopener">Fotografiska Stockholm</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="leave-btn">
+      <a
+        href="https://www.instagram.com/tobichristoph"
+        target="_blank"
+        rel="noopener"
+        class="leave-link"
+      ><span>IG</span></a>
+      <a
+        href="mailto:tobiashchristoph@outlook.com"
+        class="leave-link"
+      ><span>MAIL</span></a>
+    </div>
+
+    <div id="section-info">
+      <div id="section-dots"></div>
+      <div id="section-name"></div>
+      <div id="section-cta"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="sections.js"></script>
+    <script src="darkroom.js"></script>
+    <script src="zine-carousel.js"></script>
+  </body>
+</html>
