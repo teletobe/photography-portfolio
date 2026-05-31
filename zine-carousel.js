@@ -175,10 +175,9 @@
         wrap.style.transitionDelay = (k * 0.09) + "s";
 
         const img = document.createElement("img");
-        img.src      = photos[pi + k].src;
-        img.alt      = "";
-        img.loading  = "lazy";
-        img.decoding = "async";
+        img.dataset.src = photos[pi + k].src;
+        img.alt         = "";
+        img.decoding    = "async";
         wrap.appendChild(img);
         block.appendChild(wrap);
       }
@@ -190,9 +189,17 @@
 
     const obs = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
+        if (!e.isIntersecting) return;
+        obs.unobserve(e.target);
+        const img = e.target.querySelector("img[data-src]");
+        if (!img) return;
+        const reveal = () => e.target.classList.add("visible");
+        img.onload  = reveal;
+        img.onerror = reveal;
+        img.src = img.dataset.src;
+        delete img.dataset.src;
       }),
-      { threshold: 0.08, root: readerBody, rootMargin: "500px 0px" }
+      { threshold: 0, root: readerBody, rootMargin: "300px 0px" }
     );
     content.querySelectorAll(".zcr-wrap").forEach((w) => obs.observe(w));
   }
