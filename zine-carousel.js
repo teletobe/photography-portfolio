@@ -38,14 +38,74 @@
   `;
   document.body.appendChild(reader);
 
-  const track       = document.getElementById("zc-track");
-  const dotsEl      = document.getElementById("zc-dots");
-  const prevBtn     = overlay.querySelector(".zc-btn--prev");
-  const nextBtn     = overlay.querySelector(".zc-btn--next");
-  const closeBtn    = document.getElementById("zc-reader-close");
+  const track = document.getElementById("zc-track");
+  const dotsEl = document.getElementById("zc-dots");
+  const prevBtn = overlay.querySelector(".zc-btn--prev");
+  const nextBtn = overlay.querySelector(".zc-btn--next");
+  const closeBtn = document.getElementById("zc-reader-close");
   const readerTitle = document.getElementById("zc-reader-title");
-  const readerBody  = document.getElementById("zc-reader-body");
-  const content     = document.getElementById("zc-content");
+  const readerBody = document.getElementById("zc-reader-body");
+  const content = document.getElementById("zc-content");
+
+  // fullscreen photo lightbox
+  const lightbox = document.createElement("div");
+  lightbox.id = "zc-lightbox";
+  lightbox.innerHTML = `
+    <img id="zc-lightbox-img" src="" alt="" />
+    <button id="zc-lightbox-close" aria-label="Close">×</button>
+  `;
+  document.body.appendChild(lightbox);
+
+  const lbImg = document.getElementById("zc-lightbox-img");
+  const lbClose = document.getElementById("zc-lightbox-close");
+
+  function openLightbox(src) {
+    lbImg.src = src;
+    lightbox.classList.add("active");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    lbImg.style.transform = "";
+  }
+
+  lightbox.addEventListener("click", closeLightbox);
+  lbClose.addEventListener("click", closeLightbox);
+
+  // swipe down to dismiss
+  let lbTouchY = 0;
+  let lbDeltaY = 0;
+  lightbox.addEventListener(
+    "touchstart",
+    (e) => {
+      lbTouchY = e.touches[0].clientY;
+      lbDeltaY = 0;
+    },
+    { passive: true },
+  );
+  lightbox.addEventListener(
+    "touchmove",
+    (e) => {
+      lbDeltaY = e.touches[0].clientY - lbTouchY;
+      if (lbDeltaY > 0) {
+        lbImg.style.transform = `scale(1) translateY(${lbDeltaY}px)`;
+        lbImg.style.transition = "none";
+      }
+    },
+    { passive: true },
+  );
+  lightbox.addEventListener(
+    "touchend",
+    () => {
+      lbImg.style.transition = "";
+      if (lbDeltaY > 80) {
+        closeLightbox();
+      } else {
+        lbImg.style.transform = "";
+      }
+    },
+    { passive: true },
+  );
 
   let activeIndex = 0;
   const cards = [];
@@ -64,7 +124,7 @@
         </div>
         <div class="zc-card-meta">
           <span class="zc-card-title">${album.title.toUpperCase()}</span>
-          <span class="zc-card-sub">${album.subtitle}</span>
+          <span class="zc-card-sub">${album.subtitle || ""}</span>
           <span class="zc-card-open">[ OPEN ]</span>
         </div>
       </div>
@@ -86,7 +146,7 @@
   function normalizedOffset(i) {
     const n = ALBUMS.length;
     let off = i - activeIndex;
-    while (off >  n / 2) off -= n;
+    while (off > n / 2) off -= n;
     while (off < -n / 2) off += n;
     return off;
   }
@@ -120,9 +180,11 @@
       }
     });
 
-    dotsEl.querySelectorAll(".zc-dot").forEach((d, i) =>
-      d.classList.toggle("zc-dot--active", i === activeIndex)
-    );
+    dotsEl
+      .querySelectorAll(".zc-dot")
+      .forEach((d, i) =>
+        d.classList.toggle("zc-dot--active", i === activeIndex),
+      );
   }
 
   function goTo(i) {
@@ -134,50 +196,64 @@
   nextBtn.addEventListener("click", () => goTo(activeIndex + 1));
 
   let sx = 0;
-  track.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener("touchend",   (e) => {
-    const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 40) dx < 0 ? goTo(activeIndex + 1) : goTo(activeIndex - 1);
-  }, { passive: true });
+  track.addEventListener(
+    "touchstart",
+    (e) => {
+      sx = e.touches[0].clientX;
+    },
+    { passive: true },
+  );
+  track.addEventListener(
+    "touchend",
+    (e) => {
+      const dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40)
+        dx < 0 ? goTo(activeIndex + 1) : goTo(activeIndex - 1);
+    },
+    { passive: true },
+  );
 
   // editorial layout for the reader scroll view
   const SHIFTS = [0, 44, -36, 28, -52, 18, 40, -28, 56, -40, 24, -48];
   const LAYOUTS = [
-    { type: "hero",       count: 1 },
+    { type: "hero", count: 1 },
     { type: "duo-offset", count: 2 },
-    { type: "solo-left",  count: 1 },
-    { type: "trio",       count: 3 },
+    { type: "solo-left", count: 1 },
+    { type: "trio", count: 3 },
     { type: "solo-right", count: 1 },
-    { type: "duo-even",   count: 2 },
+    { type: "duo-even", count: 2 },
   ];
   const MOBILE_LAYOUTS = [
-    { type: "duo-even",   count: 2 },
-    { type: "solo-left",  count: 1 },
+    { type: "duo-even", count: 2 },
+    { type: "solo-left", count: 1 },
     { type: "duo-offset", count: 2 },
     { type: "solo-right", count: 1 },
   ];
 
   function buildZine(photos) {
     content.innerHTML = "";
-    let pi = 0, li = 0;
+    let pi = 0,
+      li = 0;
     const layouts = window.innerWidth <= 640 ? MOBILE_LAYOUTS : LAYOUTS;
 
     while (pi < photos.length) {
       const layout = layouts[li % layouts.length];
-      const count  = Math.min(layout.count, photos.length - pi);
-      const block  = document.createElement("div");
+      const count = Math.min(layout.count, photos.length - pi);
+      const block = document.createElement("div");
       block.className = `zcr-block zcr-${layout.type}`;
       block.style.setProperty("--shift", SHIFTS[li % SHIFTS.length] + "px");
 
       for (let k = 0; k < count; k++) {
         const wrap = document.createElement("div");
         wrap.className = "zcr-wrap";
-        wrap.style.transitionDelay = (k * 0.09) + "s";
+        wrap.style.transitionDelay = k * 0.09 + "s";
 
         const img = document.createElement("img");
         img.dataset.src = photos[pi + k].src;
-        img.alt         = "";
-        img.decoding    = "async";
+        img.alt = "";
+        img.decoding = "async";
+        const imgSrc = photos[pi + k].src;
+        wrap.addEventListener("click", () => openLightbox(imgSrc));
         wrap.appendChild(img);
         block.appendChild(wrap);
       }
@@ -186,20 +262,20 @@
       pi += count;
       li++;
     }
-
     const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        obs.unobserve(e.target);
-        const img = e.target.querySelector("img[data-src]");
-        if (!img) return;
-        const reveal = () => e.target.classList.add("visible");
-        img.onload  = reveal;
-        img.onerror = reveal;
-        img.src = img.dataset.src;
-        delete img.dataset.src;
-      }),
-      { threshold: 0, root: readerBody, rootMargin: "300px 0px" }
+      (entries) =>
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          obs.unobserve(e.target);
+          const img = e.target.querySelector("img[data-src]");
+          if (!img) return;
+          const reveal = () => e.target.classList.add("visible");
+          img.onload = reveal;
+          img.onerror = reveal;
+          img.src = img.dataset.src;
+          delete img.dataset.src;
+        }),
+      { threshold: 0, root: readerBody, rootMargin: "300px 0px" },
     );
     content.querySelectorAll(".zcr-wrap").forEach((w) => obs.observe(w));
   }
@@ -218,7 +294,9 @@
     reader.classList.remove("active");
     reader.setAttribute("aria-hidden", "true");
     window.zineReaderActive = false;
-    setTimeout(() => { content.innerHTML = ""; }, 380);
+    setTimeout(() => {
+      content.innerHTML = "";
+    }, 380);
   }
 
   closeBtn.addEventListener("click", closeReader);
@@ -232,12 +310,21 @@
 
   // darkroom.js bails early if zineCarouselActive, so arrows are ours when open
   document.addEventListener("keydown", (e) => {
-    if ((e.key === "Escape" || e.key === "ArrowDown") && window.zineReaderActive) {
+    if (e.key === "Escape" && lightbox.classList.contains("active")) {
+      e.stopImmediatePropagation();
+      closeLightbox();
+      return;
+    }
+    if (
+      (e.key === "Escape" || e.key === "ArrowDown") &&
+      window.zineReaderActive
+    ) {
+      e.stopImmediatePropagation();
       closeReader();
       return;
     }
     if (!window.zineCarouselActive || window.zineReaderActive) return;
-    if (e.key === "ArrowLeft")  goTo(activeIndex - 1);
+    if (e.key === "ArrowLeft") goTo(activeIndex - 1);
     if (e.key === "ArrowRight") goTo(activeIndex + 1);
     if (e.key === "Enter" || e.key === "ArrowUp") {
       e.preventDefault();
