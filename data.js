@@ -2,7 +2,7 @@
 
 const ZINES = [
   {
-    id: "Artsy",
+    id: "artsy",
     title: "Artsy",
     cover: "img/zines/Artsy/cover.jpg",
     photos: [
@@ -25,7 +25,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Balkan Roadtrip",
+    id: "balkan roadtrip",
     title: "Balkan Roadtrip",
     cover: "img/zines/Balkan%20Roadtrip/balkan1.jpg",
     photos: [
@@ -72,7 +72,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Barcelona",
+    id: "barcelona",
     title: "Barcelona",
     cover: "img/zines/Barcelona/cover.jpg",
     photos: [
@@ -105,7 +105,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Berg",
+    id: "berg",
     title: "Berg",
     cover: "img/zines/Berg/cover.jpg",
     photos: [
@@ -207,7 +207,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Iceland 2025",
+    id: "iceland 2025",
     title: "Iceland 2025",
     cover: "img/zines/Iceland%202025/cover.jpg",
     photos: [
@@ -234,7 +234,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Japan",
+    id: "japan",
     title: "Japan",
     cover: "img/zines/Japan/japan1.jpg",
     photos: [
@@ -294,7 +294,7 @@ const ZINES = [
     ],
   },
   {
-    id: "NYC",
+    id: "nyc",
     title: "NYC",
     cover: "img/zines/NYC/nyc1.jpg",
     photos: [
@@ -355,7 +355,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Paris",
+    id: "paris",
     title: "Paris",
     cover: "img/zines/Paris/cover.jpg",
     photos: [
@@ -410,7 +410,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Portfolio",
+    id: "portfolio",
     title: "Portfolio",
     cover: "img/zines/Portfolio/pf1.jpg",
     photos: [
@@ -514,7 +514,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Portraits",
+    id: "portraits",
     title: "Portraits",
     cover: "img/zines/Portraits/portrait1.jpg",
     photos: [
@@ -549,7 +549,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Skitour",
+    id: "skitour",
     title: "Skitour",
     cover: "img/zines/Skitour/cover.jpg",
     photos: [
@@ -565,7 +565,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Street",
+    id: "street",
     title: "Street",
     cover: "img/zines/Street/street1.jpg",
     photos: [
@@ -594,7 +594,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Tenerife",
+    id: "tenerife",
     title: "Tenerife",
     cover: "img/zines/Tenerife/cover.jpg",
     photos: [
@@ -625,7 +625,7 @@ const ZINES = [
     ],
   },
   {
-    id: "Wedding",
+    id: "wedding",
     title: "Wedding",
     cover: "img/zines/Wedding/cover.jpg",
     photos: [
@@ -638,13 +638,13 @@ const ZINES = [
       { src: "img/zines/Wedding/wedding-7.jpg" },
       { src: "img/zines/Wedding/wedding-9.jpg" },
       { src: "img/zines/Wedding/wedding-10.jpg" },
-      { src: "img/zines/Wedding/wedding-11.jpg" },
       { src: "img/zines/Wedding/wedding-12.jpg" },
       { src: "img/zines/Wedding/wedding-13.jpg" },
+      { src: "img/zines/Wedding/wedding-14.jpg" },
     ],
   },
   {
-    id: "Winter in Wien",
+    id: "winter in wien",
     title: "Winter in Wien",
     cover: "img/zines/Winter%20in%20Wien/cover.jpg",
     photos: [

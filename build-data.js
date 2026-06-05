@@ -48,7 +48,7 @@ const zines = folders.map((folder) => {
 
   const cover = coverFile ? encodePath(`img/zines/${folder}/${coverFile}`) : photos[0];
 
-  return { id: folder, title: titleFromFolder(folder), cover, photos };
+  return { id: folder.toLowerCase(), title: titleFromFolder(folder), cover, photos };
 }).filter((z) => z.photos.length > 0);
 
 const lines = zines.map((z) => {
