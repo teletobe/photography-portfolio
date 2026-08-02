@@ -191,6 +191,7 @@ img.onload = () => {
     loader.classList.add("fade-out");
     setTimeout(() => {
       loader.style.display = "none";
+      if (window.openPortfolioReader) window.openPortfolioReader();
     }, 800);
   }, 300);
 };
