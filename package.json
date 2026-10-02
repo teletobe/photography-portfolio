@@ -1,5 +1,8 @@
 {
   "scripts": {
     "dev": "npx serve ."
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
