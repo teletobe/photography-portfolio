@@ -1,0 +1,191 @@
+/* gear modal */
+#gear-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 6, 0, 0.75);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+#gear-modal.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+#gear-modal-box {
+  position: relative;
+  background: rgba(19, 10, 0, 0.95);
+  border: 1px solid rgba(200, 168, 130, 0.15);
+  border-radius: 12px;
+  padding: 48px 48px 44px;
+  max-width: 720px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--dim);
+}
+#gear-modal-box::-webkit-scrollbar {
+  width: 4px;
+}
+#gear-modal-box::-webkit-scrollbar-track {
+  background: var(--dim);
+}
+#gear-modal-box::-webkit-scrollbar-thumb {
+  background: var(--muted);
+}
+
+#gear-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 22px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+#gear-modal-close:hover {
+  color: var(--text);
+}
+#gear-modal-content {
+  font-family: "Space Mono", monospace;
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.9;
+}
+#gear-modal-content p {
+  margin-bottom: 1.4em;
+}
+#gear-modal-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* inspiration modal */
+#inspiration-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13, 6, 0, 0.75);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+#inspiration-modal.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+#inspiration-modal-box {
+  position: relative;
+  background: rgba(19, 10, 0, 0.95);
+  border: 1px solid rgba(200, 168, 130, 0.15);
+  border-radius: 12px;
+  padding-top: 48px;
+  max-width: 720px;
+  width: 90%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+#inspiration-modal-body {
+  overflow-y: auto;
+  padding: 0 48px 44px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--dim);
+}
+#inspiration-modal-body::-webkit-scrollbar {
+  width: 4px;
+}
+#inspiration-modal-body::-webkit-scrollbar-track {
+  background: var(--dim);
+}
+#inspiration-modal-body::-webkit-scrollbar-thumb {
+  background: var(--muted);
+}
+#inspiration-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 22px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+#inspiration-modal-close:hover {
+  color: var(--text);
+}
+#inspiration-modal-content {
+  font-family: "Space Mono", monospace;
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.9;
+}
+#inspiration-modal-content .insp-heading {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--amber);
+  letter-spacing: 3px;
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+#inspiration-modal-content .insp-heading:first-child {
+  margin-top: 0;
+}
+#inspiration-modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#inspiration-modal-content li {
+  margin-bottom: 0.5em;
+}
+#inspiration-modal-content li::before {
+  content: "\2022 ";
+  color: var(--muted);
+}
+#inspiration-modal-content a {
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid rgba(200, 168, 130, 0.25);
+  padding: 3px 10px;
+  border-radius: 4px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+#inspiration-modal-content a:hover {
+  color: var(--amber);
+  border-color: rgba(230, 126, 34, 0.7);
+  background: rgba(230, 126, 34, 0.08);
+}
+
+@media (max-width: 600px) {
+  #gear-modal-box {
+    padding: 32px 20px 28px;
+  }
+  #inspiration-modal-box {
+    padding-top: 32px;
+  }
+  #inspiration-modal-body {
+    padding: 0 20px 28px;
+  }
+  #gear-modal-content,
+  #inspiration-modal-content {
+    font-size: 13px;
+  }
+  #inspiration-modal-content .insp-heading {
+    font-size: 10px;
+  }
+}

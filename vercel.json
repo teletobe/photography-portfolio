@@ -1,5 +1,11 @@
 {
   "buildCommand": "node build-data.js",
   "outputDirectory": ".",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/gear", "destination": "/index.html" },
+    { "source": "/portfolio", "destination": "/index.html" },
+    { "source": "/albums", "destination": "/index.html" }
+  ]
 }

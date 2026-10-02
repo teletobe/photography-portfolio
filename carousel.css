@@ -1,0 +1,472 @@
+/* hide the CTA while the carousel is up */
+#section-info.carousel-mode #section-cta {
+  display: none;
+}
+
+/* carousel back button */
+#zc-back {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  border: 1px solid rgba(200, 168, 130, 0.3);
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: rgba(13, 6, 0, 0.5);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  letter-spacing: 2px;
+  pointer-events: all;
+  margin-top: 18px;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+#zc-back:hover {
+  border-color: rgba(230, 126, 34, 0.7);
+  color: var(--amber);
+}
+
+/* when carousel is hidden, block all pointer events inside it */
+#zc-overlay:not(.visible) * {
+  pointer-events: none;
+}
+
+/* overlay that fades in over the panorama */
+#zc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  background: radial-gradient(
+    ellipse 70% 65% at 50% 52%,
+    rgba(13, 6, 0, 0.78) 0%,
+    transparent 100%
+  );
+}
+#zc-overlay.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Push content slightly above centre to clear section-info bar */
+#zc-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 90px;
+}
+
+#zc-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 4px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* carousel */
+:root {
+  --zc-step: 190px;
+}
+
+#zc-nav {
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+#zc-track {
+  position: relative;
+  width: calc(var(--zc-step) * 2 + 220px);
+  height: 380px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Arrow buttons */
+.zc-btn {
+  font-size: 22px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px 12px;
+  flex-shrink: 0;
+  pointer-events: all;
+  transition:
+    color 0.2s,
+    transform 0.15s;
+  user-select: none;
+}
+.zc-btn:hover {
+  color: var(--amber);
+  transform: scale(1.25);
+}
+.zc-btn:active {
+  transform: scale(0.9);
+}
+
+/* dots */
+#zc-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+.zc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  pointer-events: all;
+  transition: background 0.3s;
+}
+.zc-dot--active {
+  background: var(--amber);
+}
+
+/* zine cards */
+.zc-card {
+  position: absolute;
+  width: 210px;
+  cursor: pointer;
+  pointer-events: all;
+  transform: translateX(calc(var(--off, 0) * var(--zc-step)))
+    scale(var(--sc, 1)) rotate(var(--rot, 0deg));
+  opacity: var(--op, 1);
+  z-index: var(--zi, 1);
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.1, 0.64, 1),
+    opacity 0.45s ease;
+  outline: none;
+}
+.zc-card.zc-center {
+  transform: translateX(0) scale(1) rotate(0deg);
+}
+.zc-card.zc-hidden {
+  pointer-events: none;
+}
+
+/* Physical print border */
+.zc-card-inner {
+  background: #100800;
+  border: 1px solid rgba(200, 168, 130, 0.09);
+  border-radius: 8px;
+  box-shadow: 8px 14px 40px rgba(0, 0, 0, 0.72);
+  overflow: hidden;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+}
+.zc-card.zc-center:hover .zc-card-inner,
+.zc-card.zc-center:focus-visible .zc-card-inner {
+  border-color: rgba(230, 126, 34, 0.35);
+  box-shadow:
+    20px 30px 60px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(230, 126, 34, 0.18);
+}
+
+/* Cover image */
+.zc-card-cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #0e0800;
+}
+.zc-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85) saturate(0.82);
+  transition:
+    transform 0.5s ease,
+    filter 0.4s ease;
+}
+.zc-card.zc-center:hover .zc-card-cover img {
+  transform: scale(1.05);
+  filter: brightness(1) saturate(1);
+}
+
+/* Label bar */
+.zc-card-meta {
+  padding: 10px 12px 13px;
+  border-top: 1px solid rgba(200, 168, 130, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.zc-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 2px;
+}
+.zc-card-sub {
+  font-size: 8px;
+  color: var(--muted);
+  font-family: "Space Mono", monospace;
+}
+.zc-card-open {
+  font-size: 10px;
+  color: var(--amber);
+  letter-spacing: 2px;
+  margin-top: 2px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.zc-card.zc-center:hover .zc-card-open,
+.zc-card.zc-center:focus-visible .zc-card-open {
+  opacity: 1;
+}
+
+/* reader — full screen zine view */
+#zc-reader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #0a0600;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  overflow: hidden;
+}
+#zc-reader.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#zc-reader-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(200, 168, 130, 0.09);
+  flex-shrink: 0;
+  background: rgba(10, 6, 0, 0.96);
+}
+#zc-reader-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 3px;
+}
+#zc-reader-close {
+  font-size: 24px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  outline: none;
+  transition: color 0.2s;
+}
+#zc-reader-close:hover {
+  color: var(--text);
+}
+
+#zc-reader-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+/* editorial scroll layout inside the reader */
+#zc-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 64px 32px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.zcr-block {
+  width: calc(100% - max(0px, var(--shift, 0px)) - max(0px, calc(-1 * var(--shift, 0px))));
+  margin-left: max(0px, var(--shift, 0px));
+  margin-right: max(0px, calc(-1 * var(--shift, 0px)));
+}
+.zcr-duo-offset {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 12px;
+  align-items: center;
+}
+.zcr-solo-left {
+  display: flex;
+}
+.zcr-solo-left .zcr-wrap {
+  width: 56%;
+}
+.zcr-trio {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+}
+.zcr-solo-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.zcr-solo-right .zcr-wrap {
+  width: 56%;
+}
+.zcr-duo-even {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Scroll-reveal image wrapper */
+.zcr-wrap {
+  background: #111;
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 1.7s cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 1.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.zcr-wrap.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.zcr-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.zcr-wrap:hover img {
+  transform: scale(1.02);
+}
+
+/* fullscreen photo lightbox */
+#zc-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(5, 3, 0, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  cursor: zoom-out;
+}
+#zc-lightbox.active {
+  opacity: 1;
+  pointer-events: all;
+}
+#zc-lightbox img {
+  max-width: 92vw;
+  max-height: 90vh;
+  object-fit: contain;
+  transform: scale(0.92) translateY(0);
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  pointer-events: none;
+  user-select: none;
+}
+#zc-lightbox.active img {
+  transform: scale(1) translateY(0);
+}
+#zc-lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 24px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+#zc-lightbox-close:hover {
+  color: var(--text);
+}
+
+/* large screen tweaks */
+@media (min-width: 1600px) {
+  :root {
+    --zc-step: 250px;
+  }
+  #zc-track {
+    width: calc(var(--zc-step) * 2 + 300px);
+    height: 490px;
+  }
+  .zc-card {
+    width: 280px;
+  }
+}
+
+@media (min-width: 2200px) {
+  :root {
+    --zc-step: 330px;
+  }
+  #zc-track {
+    width: calc(var(--zc-step) * 2 + 390px);
+    height: 640px;
+  }
+  .zc-card {
+    width: 370px;
+  }
+}
+
+/* mobile tweaks */
+@media (max-width: 600px) {
+  :root {
+    --zc-step: 165px;
+  }
+  #zc-track {
+    width: calc(var(--zc-step) * 2 + 180px);
+    height: 320px;
+  }
+  .zc-card {
+    width: 170px;
+  }
+  .zc-btn {
+    display: none;
+  }
+  #zc-inner {
+    margin-bottom: 70px;
+  }
+
+  #zc-content {
+    padding: 32px 20px 80px;
+  }
+  .zcr-block {
+    width: calc(100% - max(0px, calc(var(--shift, 0px) * 0.25)) - max(0px, calc(-1 * var(--shift, 0px) * 0.25)));
+    margin-left: max(0px, calc(var(--shift, 0px) * 0.25));
+    margin-right: max(0px, calc(-1 * var(--shift, 0px) * 0.25));
+  }
+  .zcr-duo-offset {
+    grid-template-columns: 3fr 2fr;
+  }
+  .zcr-solo-left .zcr-wrap,
+  .zcr-solo-right .zcr-wrap {
+    width: 60%;
+  }
+}

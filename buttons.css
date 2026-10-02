@@ -1,0 +1,99 @@
+/* overlay buttons — shared base for section action buttons */
+.overlay-btn {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  letter-spacing: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  cursor: pointer;
+  text-shadow: 0 0 24px rgba(200, 168, 130, 0.5);
+}
+.overlay-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.overlay-btn span {
+  border: 1px solid rgba(200, 168, 130, 0.3);
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: rgba(13, 6, 0, 0.55);
+  transition: border-color 0.2s, background 0.2s, color 0.2s, text-shadow 0.2s;
+}
+.overlay-btn span:hover {
+  color: var(--amber);
+  text-shadow: 0 0 32px rgba(230, 126, 34, 0.6);
+  border-color: rgba(230, 126, 34, 0.5);
+  background: rgba(230, 126, 34, 0.08);
+}
+
+/* contact section */
+#leave-btn {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+#leave-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.leave-link {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 4px;
+  text-shadow: 0 0 24px rgba(200, 168, 130, 0.5);
+  transition: color 0.2s, text-shadow 0.2s;
+}
+.leave-link span {
+  border: 1px solid rgba(200, 168, 130, 0.3);
+  padding: 16px 32px;
+  display: block;
+  border-radius: 8px;
+  background: rgba(13, 6, 0, 0.55);
+  transition: border-color 0.2s, background 0.2s;
+}
+.leave-link:hover {
+  color: var(--amber);
+  text-shadow: 0 0 32px rgba(230, 126, 34, 0.6);
+}
+.leave-link:hover span {
+  border-color: rgba(230, 126, 34, 0.5);
+  background: rgba(230, 126, 34, 0.08);
+}
+
+@media (max-width: 600px) {
+  .overlay-btn {
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 0 10%;
+    text-align: center;
+  }
+  #leave-btn {
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 0 10%;
+    text-align: center;
+  }
+}

@@ -12,9 +12,15 @@ const prevName = document.getElementById("prev-name");
 const nextName = document.getElementById("next-name");
 
 const N = SECTIONS.length;
+// check URL path to start on a specific section (e.g. /contact)
+const PATH_ALIASES = { ALBUMS: "ZINES" };
+const pathName = window.location.pathname.slice(1).toUpperCase();
+const sectionName = PATH_ALIASES[pathName] || pathName;
+const startSection = SECTIONS.findIndex((s) => s.name === sectionName);
+
 let imgW,
   imgH,
-  currentSection = 1,
+  currentSection = startSection >= 0 ? startSection : 1,
   busy = false;
 // accumulated px shift so wrap-around pans the right direction
 let wrapOffset = 0;
