@@ -104,7 +104,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 0 20px;
-  opacity: 0.4;
+  opacity: 0.8;
   transition: opacity 0.25s;
 }
 .nav-zone:hover .nav-inner {
