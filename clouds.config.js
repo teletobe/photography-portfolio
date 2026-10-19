@@ -30,7 +30,7 @@ module.exports = {
       ],
       Outdoors: [
         { photo: "Mountains/berg46.jpg", x: 67, y: 33, size: 36 },
-        { photo: "Gravel/gravel16.jpg", x: 35, y: 39, size: 40, depth: 60 },
+        { photo: "Bike/gravel16.jpg", x: 35, y: 39, size: 40, depth: 60 },
         { photo: "Mountains/berg27.jpg", x: 55, y: 65, size: 46, depth: 40 },
       ],
       Events: [
@@ -84,7 +84,7 @@ module.exports = {
       Outdoors: [
         { photo: "Mountains/berg46.jpg", x: 57, y: 49, size: 51 },
         { photo: "Mountains/berg27.jpg", x: 46, y: 61, size: 46, depth: 40 },
-        { photo: "Gravel/gravel16.jpg", x: 30, y: 45, size: 55, depth: 60 },
+        { photo: "Bike/gravel16.jpg", x: 30, y: 45, size: 55, depth: 60 },
       ],
       Events: [
         { photo: "Wedding/wed0.jpg", x: 49, y: 50, size: 85 },
@@ -133,9 +133,10 @@ module.exports = {
   // The photo that represents each album on a section's overview page.
   albums: {
     "Outdoors/Mountains": "berg46.jpg",
-    "Outdoors/Cycling": "tdf19.jpg",
-    "Events/Wedding": "wedding-10.jpg",
-    "Events/Cycling Event": "placeholder-0.jpg",
+    "Outdoors/Winter": "winter10.jpg",
+    "Outdoors/Bike": "gravel4.jpg",
+    "Events/Wedding": "wed11.jpg",
+    "Events/Good Times Gravel": "gtg17.jpg",
     "Travel/Iceland 2025": "ice17.jpg",
     "Travel/Paris": "cover.jpg",
     "Travel/Winter in Wien": "cover.jpg",

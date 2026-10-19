@@ -301,39 +301,39 @@ const MEDIA = [
           "/media/02%20Outdoors/02%20Winter/winter24.jpg",
           "/media/02%20Outdoors/02%20Winter/winter25.jpg"
         ],
-        "cover": "/media/02%20Outdoors/02%20Winter/winter1.jpg"
+        "cover": "/media/02%20Outdoors/02%20Winter/winter10.jpg"
       },
       {
-        "id": "gravel",
-        "title": "Gravel",
+        "id": "bike",
+        "title": "Bike",
         "photos": [
-          "/media/02%20Outdoors/03%20Gravel/gravel0.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel1.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel2.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel3.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel4.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel5.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel6.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel7.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel8.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel9.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel10.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel11.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel12.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel13.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel14.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel15.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel16.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel17.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel18.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel19.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel20.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel21.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel22.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel23.jpg",
-          "/media/02%20Outdoors/03%20Gravel/gravel25.jpg"
+          "/media/02%20Outdoors/03%20Bike/gravel0.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel1.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel2.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel3.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel4.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel5.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel6.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel7.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel8.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel9.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel10.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel11.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel12.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel13.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel14.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel15.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel16.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel17.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel18.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel19.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel20.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel21.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel22.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel23.jpg",
+          "/media/02%20Outdoors/03%20Bike/gravel25.jpg"
         ],
-        "cover": "/media/02%20Outdoors/03%20Gravel/gravel0.jpg"
+        "cover": "/media/02%20Outdoors/03%20Bike/gravel4.jpg"
       }
     ],
     "room": [
@@ -345,8 +345,8 @@ const MEDIA = [
         "w": 36
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel16.jpg",
-        "photo": "Gravel/gravel16.jpg",
+        "src": "/media/02%20Outdoors/03%20Bike/gravel16.jpg",
+        "photo": "Bike/gravel16.jpg",
         "x": 35,
         "y": 39,
         "w": 40,
@@ -378,8 +378,8 @@ const MEDIA = [
         "z": 40
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel16.jpg",
-        "photo": "Gravel/gravel16.jpg",
+        "src": "/media/02%20Outdoors/03%20Bike/gravel16.jpg",
+        "photo": "Bike/gravel16.jpg",
         "x": 30,
         "y": 45,
         "w": 55,
@@ -421,7 +421,7 @@ const MEDIA = [
           "/media/03%20Events/01%20Wedding/wedding-13.jpg",
           "/media/03%20Events/01%20Wedding/wedding-14.jpg"
         ],
-        "cover": "/media/03%20Events/01%20Wedding/wed0.jpg"
+        "cover": "/media/03%20Events/01%20Wedding/wed11.jpg"
       },
       {
         "id": "good-times-gravel",
@@ -469,7 +469,7 @@ const MEDIA = [
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg40.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg41.jpg"
         ],
-        "cover": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg1.jpg"
+        "cover": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg17.jpg"
       }
     ],
     "room": [
@@ -1729,7 +1729,7 @@ const ZINES = [
   {
     "id": "winter",
     "title": "Winter",
-    "cover": "/media/02%20Outdoors/02%20Winter/winter1.jpg",
+    "cover": "/media/02%20Outdoors/02%20Winter/winter10.jpg",
     "photos": [
       {
         "src": "/media/02%20Outdoors/02%20Winter/winter1.jpg"
@@ -1809,91 +1809,91 @@ const ZINES = [
     ]
   },
   {
-    "id": "gravel",
-    "title": "Gravel",
-    "cover": "/media/02%20Outdoors/03%20Gravel/gravel0.jpg",
+    "id": "bike",
+    "title": "Bike",
+    "cover": "/media/02%20Outdoors/03%20Bike/gravel4.jpg",
     "photos": [
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel0.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel0.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel1.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel1.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel2.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel2.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel3.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel3.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel4.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel4.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel5.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel5.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel6.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel6.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel7.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel7.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel8.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel8.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel9.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel9.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel10.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel10.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel11.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel11.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel12.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel12.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel13.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel13.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel14.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel14.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel15.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel15.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel16.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel16.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel17.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel17.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel18.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel18.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel19.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel19.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel20.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel20.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel21.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel21.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel22.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel22.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel23.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel23.jpg"
       },
       {
-        "src": "/media/02%20Outdoors/03%20Gravel/gravel25.jpg"
+        "src": "/media/02%20Outdoors/03%20Bike/gravel25.jpg"
       }
     ]
   },
   {
     "id": "wedding",
     "title": "Wedding",
-    "cover": "/media/03%20Events/01%20Wedding/wed0.jpg",
+    "cover": "/media/03%20Events/01%20Wedding/wed11.jpg",
     "photos": [
       {
         "src": "/media/03%20Events/01%20Wedding/wed0.jpg"
@@ -1972,7 +1972,7 @@ const ZINES = [
   {
     "id": "good-times-gravel",
     "title": "Good Times Gravel",
-    "cover": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg1.jpg",
+    "cover": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg17.jpg",
     "photos": [
       {
         "src": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg1.jpg"
