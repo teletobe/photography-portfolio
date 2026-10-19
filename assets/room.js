@@ -456,6 +456,30 @@ async function back() {
 }
 backBtn.onclick = back;
 
+// desktop: cap the clouds' height so a row of them, titles included, fits
+// on screen under the heading (the CSS turns this into a width per photo)
+function fitClouds() {
+  if (!sub.classList.contains("open")) return;
+  const top = cloudsEl.getBoundingClientRect().top + sub.scrollTop + parseFloat(getComputedStyle(cloudsEl).paddingTop);
+  const stagger = cloudsEl.children.length > 1 ? innerHeight * 0.07 : 0; // every other cloud sits lower
+  const caption = 90; // album title + count below the photo, and a little air
+  cloudsEl.style.setProperty("--fit-h", Math.max(240, innerHeight - top - stagger - caption) + "px");
+
+  // a capped cloud is narrower than its cell: pull it towards the middle of
+  // the row by what it lost, so neighbours keep overlapping as at full size
+  const clouds = [...cloudsEl.children];
+  const desktop = !matchMedia("(max-width: 700px)").matches;
+  const cols = Math.min(clouds.length, 4);
+  const cs = getComputedStyle(cloudsEl);
+  const cell = (cloudsEl.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) / cols;
+  clouds.forEach((c, k) => {
+    const full = Math.min(cell * 1.3 * (parseFloat(c.style.getPropertyValue("--pw")) || 1), 620);
+    const dir = Math.sign((cols - 1) / 2 - (k % cols)); // left half → right, right half → left
+    c.style.translate = desktop ? `${(dir * Math.max(0, full - c.offsetWidth)) / 2}px 0` : "";
+  });
+}
+addEventListener("resize", fitClouds);
+
 async function showSub(node) {
   document.getElementById("sub-k").textContent = kickerOf(node);
   document.getElementById("sub-title").textContent = node.title;
@@ -464,6 +488,7 @@ async function showSub(node) {
   cloudsEl.innerHTML = "";
   cloudsEl.style.setProperty("--cols", Math.min(node.children.length, 4));
   cloudsEl.classList.toggle("pairs", node.children.length > 2);
+  cloudsEl.classList.toggle("one-row", node.children.length <= 4); // nothing to scroll to on desktop
   node.children.forEach((child, k) => {
     const f = document.createElement("figure");
     f.className = "cloud";
@@ -477,8 +502,12 @@ async function showSub(node) {
   // decide every mask and size before anything is shown, so nothing jumps
   const imgs = [...cloudsEl.querySelectorAll("img")];
   await Promise.race([Promise.all(imgs.map((im) => im.decode().catch(() => {}))), wait(1500)]);
-  imgs.forEach((im) => fitMask(im, (portrait) => portrait && im.parentNode.style.setProperty("--pw", 0.7)));
+  imgs.forEach((im) => {
+    fitMask(im, (portrait) => portrait && im.parentNode.style.setProperty("--pw", 0.7));
+    if (im.naturalWidth) im.parentNode.style.setProperty("--ar", im.naturalWidth / im.naturalHeight);
+  });
   sub.classList.add("open");
+  fitClouds();
   // develop the clouds once the veil starts lifting
   setTimeout(() => sub.classList.add("developed"), 120);
 }
@@ -496,6 +525,15 @@ const io = new IntersectionObserver(
     }),
   { root: sheet, threshold: 0.05 }
 );
+// photobook rhythm, as in the old darkroom: blocks of 1–3 photos, repeating,
+// each nudged sideways a little so the edges don't line up
+const BLOCKS = {
+  desktop: ["hero", "duo-offset", "solo-left", "trio", "solo-right", "duo-even"],
+  mobile: ["duo-even", "solo-left", "duo-offset", "solo-right"],
+};
+const PER_BLOCK = { hero: 1, "duo-offset": 2, "solo-left": 1, trio: 3, "solo-right": 1, "duo-even": 2 };
+const SHIFTS = [0, 44, -36, 28, -52, 18, 40, -28, 56, -40, 24, -48]; // px
+
 function showSheet(node) {
   // an album inside a group names its group; a top-level album is just its title
   document.getElementById("sheet-k").textContent = path.length === 2 ? path[0].title : "";
@@ -503,8 +541,23 @@ function showSheet(node) {
   sheetBody.innerHTML = "";
   const feed = document.createElement("div");
   feed.className = "feed";
-  node.photos.forEach((p) => {
+  const types = BLOCKS[mode];
+  let block, room = 0;
+  node.photos.forEach((p, i) => {
+    if (!room) {
+      const left = node.photos.length - i;
+      let type = types[feed.children.length % types.length];
+      // too few photos left for this block: fall back to one that fits
+      if (PER_BLOCK[type] > left) type = left === 1 ? "solo-left" : "duo-even";
+      block = document.createElement("div");
+      block.className = "blk " + type;
+      block.style.setProperty("--shift", SHIFTS[feed.children.length % SHIFTS.length] + "px");
+      feed.appendChild(block);
+      room = PER_BLOCK[type];
+    }
     const fig = document.createElement("figure");
+    fig.style.transitionDelay = (PER_BLOCK[block.classList[1]] - room) * 0.09 + "s";
+    room--;
     fig.innerHTML = `<img loading="lazy" decoding="async" src="${p}" alt="" />`;
     const img = fig.querySelector("img");
     const loaded = () => {
@@ -517,7 +570,7 @@ function showSheet(node) {
       zoom.querySelector("img").src = p;
       zoom.classList.add("open");
     };
-    feed.appendChild(fig);
+    block.appendChild(fig);
     io.observe(fig);
   });
   sheetBody.appendChild(feed);

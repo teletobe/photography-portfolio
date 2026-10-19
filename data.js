@@ -427,6 +427,7 @@ const MEDIA = [
         "id": "good-times-gravel",
         "title": "Good Times Gravel",
         "photos": [
+          "/media/03%20Events/02%20Good%20Times%20Gravel/gtg0.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg1.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg2.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg3.jpg",
@@ -451,7 +452,6 @@ const MEDIA = [
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg22.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg23.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg24.jpg",
-          "/media/03%20Events/02%20Good%20Times%20Gravel/gtg25.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg26.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg27.jpg",
           "/media/03%20Events/02%20Good%20Times%20Gravel/gtg28.jpg",
@@ -561,10 +561,10 @@ const MEDIA = [
         "title": "Paris",
         "photos": [
           "/media/04%20Travel/02%20Paris/cover.jpg",
+          "/media/04%20Travel/02%20Paris/paris0.jpg",
           "/media/04%20Travel/02%20Paris/paris1.jpg",
           "/media/04%20Travel/02%20Paris/paris2.jpg",
           "/media/04%20Travel/02%20Paris/paris3.jpg",
-          "/media/04%20Travel/02%20Paris/paris4.jpg",
           "/media/04%20Travel/02%20Paris/paris5.jpg",
           "/media/04%20Travel/02%20Paris/paris6.jpg",
           "/media/04%20Travel/02%20Paris/paris7.jpg",
@@ -963,10 +963,10 @@ const MEDIA = [
         "id": "street",
         "title": "Street",
         "photos": [
+          "/media/05%20Street%20%26%20People/01%20Street/nyc0.jpg",
           "/media/05%20Street%20%26%20People/01%20Street/nyc1.jpg",
           "/media/05%20Street%20%26%20People/01%20Street/nyc2.jpg",
           "/media/05%20Street%20%26%20People/01%20Street/nyc3.jpg",
-          "/media/05%20Street%20%26%20People/01%20Street/street1.jpg",
           "/media/05%20Street%20%26%20People/01%20Street/street2.jpg",
           "/media/05%20Street%20%26%20People/01%20Street/street3.jpg",
           "/media/05%20Street%20%26%20People/01%20Street/street4.jpg",
@@ -1975,6 +1975,9 @@ const ZINES = [
     "cover": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg17.jpg",
     "photos": [
       {
+        "src": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg0.jpg"
+      },
+      {
         "src": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg1.jpg"
       },
       {
@@ -2045,9 +2048,6 @@ const ZINES = [
       },
       {
         "src": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg24.jpg"
-      },
-      {
-        "src": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg25.jpg"
       },
       {
         "src": "/media/03%20Events/02%20Good%20Times%20Gravel/gtg26.jpg"
@@ -2178,6 +2178,9 @@ const ZINES = [
         "src": "/media/04%20Travel/02%20Paris/cover.jpg"
       },
       {
+        "src": "/media/04%20Travel/02%20Paris/paris0.jpg"
+      },
+      {
         "src": "/media/04%20Travel/02%20Paris/paris1.jpg"
       },
       {
@@ -2185,9 +2188,6 @@ const ZINES = [
       },
       {
         "src": "/media/04%20Travel/02%20Paris/paris3.jpg"
-      },
-      {
-        "src": "/media/04%20Travel/02%20Paris/paris4.jpg"
       },
       {
         "src": "/media/04%20Travel/02%20Paris/paris5.jpg"
@@ -3067,6 +3067,9 @@ const ZINES = [
     "cover": "/media/05%20Street%20%26%20People/01%20Street/street8.jpg",
     "photos": [
       {
+        "src": "/media/05%20Street%20%26%20People/01%20Street/nyc0.jpg"
+      },
+      {
         "src": "/media/05%20Street%20%26%20People/01%20Street/nyc1.jpg"
       },
       {
@@ -3074,9 +3077,6 @@ const ZINES = [
       },
       {
         "src": "/media/05%20Street%20%26%20People/01%20Street/nyc3.jpg"
-      },
-      {
-        "src": "/media/05%20Street%20%26%20People/01%20Street/street1.jpg"
       },
       {
         "src": "/media/05%20Street%20%26%20People/01%20Street/street2.jpg"
