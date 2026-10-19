@@ -2,10 +2,11 @@
   "buildCommand": "node build-data.js",
   "outputDirectory": ".",
   "framework": null,
-  "rewrites": [
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/gear", "destination": "/index.html" },
-    { "source": "/portfolio", "destination": "/index.html" },
-    { "source": "/albums", "destination": "/index.html" }
+  "rewrites": [{ "source": "/darkroom", "destination": "/darkroom/index.html" }],
+  "redirects": [
+    { "source": "/contact", "destination": "/#contact", "permanent": true },
+    { "source": "/portfolio", "destination": "/#portfolio", "permanent": true },
+    { "source": "/albums", "destination": "/", "permanent": true },
+    { "source": "/gear", "destination": "/darkroom", "permanent": true }
   ]
 }

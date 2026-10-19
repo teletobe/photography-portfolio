@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "npx serve ."
+    "dev": "node tools/dev.js",
+    "build": "node build-data.js"
   },
   "engines": {
     "node": "24.x"

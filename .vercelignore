@@ -1,0 +1,2 @@
+# local-only tools (e.g. the ?arrange mode), never deployed
+tools/

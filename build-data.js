@@ -1,74 +1,135 @@
 #!/usr/bin/env node
 
+// scans media/ (+ clouds.config.js) and writes data.js
+//
+// media/
+//   01 Portfolio/          a folder with images = a scrollable album
+//   02 Outdoors/           a folder with subfolders = a group of albums
+//     01 Mountains/
+//     02 Cycling/
+//
+// - the leading number only sets the order, the rest is the title
+// - which photos show up as clouds, and where, lives in clouds.config.js
+
 const fs = require("fs");
 const path = require("path");
 
-const ZINES_DIR = path.join(__dirname, "img", "zines");
-const OUT_FILE = path.join(__dirname, "data.js");
+const ROOT = __dirname;
+const MEDIA_DIR = path.join(ROOT, "media");
+const OUT_FILE = path.join(ROOT, "data.js");
+const CONFIG = require("./clouds.config.js");
 
 const IMAGE_EXTS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
+const AUTO_CLOUDS = 3; // clouds picked for a group's room collage when it isn't configured
 
-function titleFromFolder(name) {
-  return name.replace(/[-_]/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+const byName = (a, b) => a.localeCompare(b, undefined, { numeric: true });
+const isImage = (f) => IMAGE_EXTS.has(path.extname(f).toLowerCase());
+const titleOf = (folder) => folder.replace(/^\d+[\s._-]*/, "").trim();
+const slug = (s) =>
+  s
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+// root-absolute, so pages in subfolders (e.g. /darkroom) can use them too
+const url = (abs) => "/" + path.relative(ROOT, abs).split(path.sep).map(encodeURIComponent).join("/");
+
+let warnings = 0;
+const warn = (msg) => {
+  warnings++;
+  console.warn("  ⚠ clouds.config.js: " + msg);
+};
+
+function scan(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const folders = entries.filter((e) => e.isDirectory()).map((e) => e.name).sort(byName);
+  const files = entries.filter((e) => e.isFile() && isImage(e.name)).map((e) => e.name).sort(byName);
+  const title = titleOf(path.basename(dir));
+  const node = { id: slug(title), title, dir };
+  if (folders.length) {
+    node.children = folders.map((f) => scan(path.join(dir, f))).filter(Boolean);
+    return node.children.length ? node : null;
+  }
+  if (!files.length) return null;
+  node.files = files;
+  node.photos = files.map((f) => url(path.join(dir, f)));
+  return node;
 }
 
-function isImage(file) {
-  return IMAGE_EXTS.has(path.extname(file).toLowerCase());
+// "Mountains/berg46.jpg" inside a section → the photo's url, or null
+function resolve(section, photo) {
+  const parts = photo.split("/");
+  let node = section;
+  for (const name of parts.slice(0, -1)) {
+    node = node.children?.find((c) => c.title.toLowerCase() === name.toLowerCase());
+    if (!node) return null;
+  }
+  return node.files?.includes(parts.at(-1)) ? url(path.join(node.dir, parts.at(-1))) : null;
 }
 
-function encodePath(filePath) {
-  return filePath.split("/").map(encodeURIComponent).join("/");
+const media = scan(MEDIA_DIR).children;
+
+for (const section of media) {
+  // the photo representing each album on its group's overview
+  for (const album of section.children || []) {
+    const key = `${section.title}/${album.title}`;
+    const pick = CONFIG.albums?.[key];
+    album.cover = pick && resolve(album, pick);
+    if (pick && !album.cover) warn(`albums["${key}"]: "${pick}" not found`);
+    album.coverFile = album.cover ? pick : album.files[0];
+    album.cover ||= album.photos[0];
+  }
+
+  // the collage in the 360 room, one set for desktop and one for mobile
+  const collage = (set) =>
+    (CONFIG.room?.[set]?.[section.title] || [])
+      .map((c) => {
+        const src = resolve(section, c.photo);
+        if (!src) warn(`room.${set}["${section.title}"]: "${c.photo}" not found`);
+        return src && { src, photo: c.photo, x: c.x, y: c.y, w: c.size, z: c.depth };
+      })
+      .filter(Boolean);
+  section.room = collage("desktop");
+  // without a mobile set, the page derives one from the desktop set
+  const mobile = collage("mobile");
+  if (mobile.length) section.roomMobile = mobile;
+  if (!section.room.length) {
+    section.room = section.children
+      ? section.children.slice(0, AUTO_CLOUDS).map((c) => ({ src: c.cover, photo: `${c.title}/${c.coverFile}` }))
+      : [{ src: section.photos[0], photo: section.files[0] }];
+  }
+  section.cover = section.room[0].src;
 }
+for (const set of Object.keys(CONFIG.room || {})) {
+  if (set !== "desktop" && set !== "mobile") warn(`room.${set}: expected room.desktop and room.mobile`);
+  for (const name of Object.keys(CONFIG.room[set] || {}))
+    if (!media.some((s) => s.title === name)) warn(`room.${set}["${name}"]: no section folder with that name`);
+}
+for (const key of Object.keys(CONFIG.albums || {}))
+  if (!media.some((s) => s.children?.some((c) => `${s.title}/${c.title}` === key))) warn(`albums["${key}"]: no album folder with that name`);
 
-const folders = fs
-  .readdirSync(ZINES_DIR, { withFileTypes: true })
-  .filter((d) => d.isDirectory())
-  .map((d) => d.name)
-  .sort();
+// strip build-only fields before writing
+const clean = (n) => {
+  const { dir, files, coverFile, ...rest } = n;
+  if (rest.children) rest.children = rest.children.map(clean);
+  return rest;
+};
 
-const zines = folders.map((folder) => {
-  const dir = path.join(ZINES_DIR, folder);
-  const files = fs
-    .readdirSync(dir)
-    .filter(isImage)
-    .sort((a, b) => {
-      const numA = parseInt(a.match(/(\d+)/)?.[1] || "0", 10);
-      const numB = parseInt(b.match(/(\d+)/)?.[1] || "0", 10);
-      return numA - numB;
-    });
+// flat album list for the darkroom page (zine-carousel.js)
+const leaves = (nodes) => nodes.flatMap((n) => (n.children ? leaves(n.children) : [n]));
+const zines = leaves(media).map((n) => ({
+  id: n.id,
+  title: n.title,
+  cover: n.cover,
+  photos: n.photos.map((src) => ({ src })),
+}));
 
-  const hasCover = files.some((f) => f.toLowerCase().startsWith("cover"));
-  const coverFile = hasCover
-    ? files.find((f) => f.toLowerCase().startsWith("cover"))
-    : files[0];
+const output = `/* Auto-generated by build-data.js from media/ and clouds.config.js — do not edit by hand */
 
-  const photos = files
-    .filter((f) => !f.toLowerCase().startsWith("cover"))
-    .map((f) => encodePath(`img/zines/${folder}/${f}`));
+const MEDIA = ${JSON.stringify(media.map(clean), null, 2)};
 
-  const cover = coverFile ? encodePath(`img/zines/${folder}/${coverFile}`) : photos[0];
-
-  return { id: folder.toLowerCase(), title: titleFromFolder(folder), cover, photos };
-}).filter((z) => z.photos.length > 0);
-
-const lines = zines.map((z) => {
-  const photoLines = z.photos.map((p) => `      { src: "${p}" },`).join("\n");
-  return `  {
-    id: "${z.id}",
-    title: "${z.title}",
-    cover: "${z.cover}",
-    photos: [
-${photoLines}
-    ],
-  },`;
-});
-
-const output = `/* Auto-generated by build-data.js — do not edit by hand */
-
-const ZINES = [
-${lines.join("\n")}
-];
+const ZINES = ${JSON.stringify(zines, null, 2)};
 `;
 
 fs.writeFileSync(OUT_FILE, output);
-console.log(`Generated ${OUT_FILE} with ${zines.length} albums.`);
+console.log(`Generated ${OUT_FILE}: ${media.length} sections, ${zines.length} albums${warnings ? `, ${warnings} warning(s)` : ""}.`);
